@@ -1,364 +1,1150 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Manual do Prestador - Portais de Convênios</title>
-  <style>
-    :root {
-      --primary: #0056b3;
-      --primary-dark: #003d80;
-      --bg-light: #f4f6f9;
-      --text-color: #2c3e50;
-      --border-color: #e2e8f0;
-      --sidebar-width: 280px;
-    }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Central de Convênios</title>
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    }
+<style>
+:root{
+  color-scheme:light dark;
+  --bg:light-dark(#f4f7fb,#0e141b);
+  --surface:light-dark(#fff,#151d26);
+  --surface2:light-dark(#f7f9fc,#1b2530);
+  --text:light-dark(#16202a,#eef3f7);
+  --muted:light-dark(#667382,#9aa8b6);
+  --line:light-dark(#e1e7ee,#2a3642);
+  --primary:light-dark(#0756b8,#4d9bff);
+  --primary2:light-dark(#eaf3ff,#122d49);
+  --shadow:0 18px 50px rgba(20,40,70,.08)
+}
 
-    body {
-      background-color: var(--bg-light);
-      color: var(--text-color);
-      min-height: 100vh;
-      display: flex;
-    }
+*{
+  box-sizing:border-box
+}
 
-    /* Sidebar Lateral Fixa */
-    aside {
-      width: var(--sidebar-width);
-      background: #ffffff;
-      border-right: 1px solid var(--border-color);
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      display: flex;
-      flex-direction: column;
-      padding: 20px 10px;
-      overflow-y: auto;
-      z-index: 100;
-      box-shadow: 2px 0 6px rgba(0,0,0,0.03);
-    }
+html,body{
+  margin:0;
+  min-height:100%;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:var(--bg);
+  color:var(--text)
+}
 
-    aside .sidebar-title {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--primary-dark);
-      padding: 10px 12px;
-      margin-bottom: 10px;
-      border-bottom: 2px solid var(--primary);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
+.app{
+  min-height:100vh;
+  background:var(--bg)
+}
 
-    .nav-list {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-    }
+.topbar{
+  height:72px;
+  border-bottom:1px solid var(--line);
+  background:var(--surface);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 5vw;
+  position:sticky;
+  top:0;
+  z-index:5
+}
 
-    .tab-btn {
-      background: none;
-      border: none;
-      text-align: left;
-      padding: 11px 14px;
-      font-size: 0.92rem;
-      font-weight: 600;
-      color: #475569;
-      cursor: pointer;
-      border-radius: 6px;
-      transition: all 0.2s ease;
-      display: block;
-      width: 100%;
-    }
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-weight:800;
+  letter-spacing:-.02em
+}
 
-    .tab-btn:hover {
-      color: var(--primary);
-      background-color: #f1f5f9;
-    }
+.brand-mark{
+  width:38px;
+  height:38px;
+  border-radius:11px;
+  background:var(--primary);
+  color:white;
+  display:grid;
+  place-items:center;
+  font-weight:900
+}
 
-    .tab-btn.active {
-      color: #ffffff !important;
-      background-color: var(--primary) !important;
-      box-shadow: 0 2px 4px rgba(0,86,179,0.25);
-    }
+.brand small{
+  display:block;
+  color:var(--muted);
+  font-size:11px;
+  font-weight:600;
+  margin-top:2px
+}
 
-    .tab-btn.highlight-btn {
-      background-color: #eff6ff;
-      color: var(--primary-dark);
-      border: 1px solid #bfdbfe;
-      margin-bottom: 10px;
-    }
+.main{
+  width:min(1180px,90vw);
+  margin:0 auto;
+  padding:52px 0 80px
+}
 
-    /* Área de Conteúdo */
-    main {
-      margin-left: var(--sidebar-width);
-      flex: 1;
-      padding: 30px;
-      max-width: 1000px;
-    }
+.hero{
+  display:grid;
+  grid-template-columns:1.25fr .75fr;
+  gap:28px;
+  align-items:stretch
+}
 
-    header {
-      background: white;
-      padding: 24px;
-      border-radius: 8px;
-      margin-bottom: 24px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-      border: 1px solid var(--border-color);
-    }
+.hero-copy{
+  padding:22px 0
+}
 
-    header h1 {
-      color: var(--primary-dark);
-      font-size: 1.8rem;
-      margin-bottom: 6px;
-    }
+.eyebrow{
+  color:var(--primary);
+  font-weight:800;
+  font-size:13px;
+  text-transform:uppercase;
+  letter-spacing:.12em
+}
 
-    header p {
-      color: #64748b;
-      font-size: 0.95rem;
-    }
+.hero h1{
+  font-size:clamp(38px,5vw,64px);
+  line-height:.98;
+  letter-spacing:-.055em;
+  margin:14px 0 18px;
+  max-width:720px
+}
 
-    .tab-content {
-      display: none;
-      animation: fadeIn 0.25s ease;
-    }
+.hero p{
+  color:var(--muted);
+  font-size:18px;
+  line-height:1.65;
+  max-width:650px;
+  margin:0 0 28px
+}
 
-    .tab-content.active {
-      display: block;
-    }
+.search{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:6px;
+  box-shadow:var(--shadow);
+  max-width:650px
+}
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(4px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+.search span{
+  font-size:20px;
+  padding-left:12px
+}
 
-    /* Cards e Seções */
-    .card {
-      background: white;
-      padding: 24px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-      border: 1px solid var(--border-color);
-    }
+.search input{
+  flex:1;
+  border:0;
+  outline:0;
+  background:transparent;
+  color:var(--text);
+  font-size:16px;
+  padding:13px 8px
+}
 
-    .card h2 {
-      color: var(--primary-dark);
-      font-size: 1.3rem;
-      margin-bottom: 12px;
-      border-bottom: 2px solid #edf2f7;
-      padding-bottom: 6px;
-    }
+.hero-card{
+  background:var(--primary);
+  color:white;
+  border-radius:26px;
+  padding:28px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  box-shadow:0 20px 45px rgba(7,86,184,.22)
+}
 
-    /* Caixa de Imagem */
-    .img-box {
-      margin: 18px 0;
-      text-align: center;
-      background: #f8fafc;
-      padding: 12px;
-      border-radius: 6px;
-      border: 1px dashed #cbd5e1;
-    }
+.hero-card .number{
+  font-size:68px;
+  font-weight:900;
+  line-height:1
+}
 
-    .img-box img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 4px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
+.hero-card p{
+  opacity:.82;
+  line-height:1.5;
+  margin:8px 0 0
+}
 
-    .img-caption {
-      margin-top: 6px;
-      font-size: 0.85rem;
-      color: #64748b;
-      font-style: italic;
-    }
+.section-head{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  margin:54px 0 18px
+}
 
-    /* Tabela de Telefones */
-    .phone-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 15px;
-    }
+.section-head h2{
+  font-size:24px;
+  margin:0;
+  letter-spacing:-.025em
+}
 
-    .phone-table th, .phone-table td {
-      border: 1px solid var(--border-color);
-      padding: 10px 14px;
-      text-align: left;
-      font-size: 0.92rem;
-    }
+.section-head p{
+  margin:0;
+  color:var(--muted);
+  font-size:14px
+}
 
-    .phone-table th {
-      background-color: #f1f5f9;
-      color: var(--primary-dark);
-    }
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px
+}
 
-    .phone-table tr:nth-child(even) {
-      background-color: #f8fafc;
-    }
+.card{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:17px;
+  min-height:142px;
+  cursor:pointer;
+  transition:.18s transform,.18s border-color,.18s box-shadow
+}
 
-    .search-input {
-      width: 100%;
-      padding: 10px 14px;
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      margin-bottom: 15px;
-      font-size: 0.95rem;
-    }
+.card:hover{
+  transform:translateY(-3px);
+  border-color:var(--primary);
+  box-shadow:var(--shadow)
+}
 
-    .alert-box {
-      background-color: #fef3c7;
-      border-left: 4px solid #f59e0b;
-      padding: 12px;
-      border-radius: 4px;
-      margin: 14px 0;
-      font-size: 0.9rem;
-    }
+.logo-slot{
+  width:52px;
+  height:52px;
+  border-radius:14px;
+  background:var(--surface2);
+  border:1px dashed var(--line);
+  display:grid;
+  place-items:center;
+  font-weight:900;
+  color:var(--primary);
+  font-size:15px;
+  margin-bottom:16px
+}
 
-    @media (max-width: 768px) {
-      body { flex-direction: column; }
-      aside { width: 100%; position: relative; }
-      main { margin-left: 0; padding: 15px; }
-    }
-  </style>
+.card h3{
+  font-size:15px;
+  margin:0 0 5px
+}
+
+.card p{
+  font-size:12px;
+  color:var(--muted);
+  margin:0;
+  line-height:1.45
+}
+
+.empty{
+  grid-column:1/-1;
+  padding:32px;
+  text-align:center;
+  color:var(--muted);
+  background:var(--surface);
+  border:1px dashed var(--line);
+  border-radius:18px
+}
+
+.detail{
+  display:none
+}
+
+.detail.active{
+  display:block
+}
+
+.home.hidden{
+  display:none
+}
+
+.back{
+  border:0;
+  background:transparent;
+  color:var(--primary);
+  font-weight:800;
+  padding:0;
+  cursor:pointer;
+  font-size:14px
+}
+
+.detail-head{
+  margin:28px 0 26px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:26px;
+  display:flex;
+  align-items:center;
+  gap:18px
+}
+
+.detail-logo{
+  width:82px;
+  height:82px;
+  border-radius:20px;
+  background:var(--surface2);
+  border:1px dashed var(--line);
+  display:grid;
+  place-items:center;
+  font-weight:900;
+  color:var(--primary);
+  font-size:22px
+}
+
+.detail-head h1{
+  margin:0 0 7px;
+  font-size:32px;
+  letter-spacing:-.04em
+}
+
+.detail-head p{
+  margin:0;
+  color:var(--muted)
+}
+
+.contact{
+  margin-left:auto;
+  background:var(--primary2);
+  color:var(--primary);
+  padding:12px 15px;
+  border-radius:13px;
+  font-weight:800;
+  font-size:14px
+}
+
+.tutorial-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px
+}
+
+.tutorial{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:22px
+}
+
+.tutorial .icon{
+  font-size:24px
+}
+
+.tutorial h3{
+  margin:10px 0 8px
+}
+
+.tutorial p{
+  color:var(--muted);
+  line-height:1.6;
+  margin:0
+}
+
+@media(max-width:900px){
+  .hero{
+    grid-template-columns:1fr
+  }
+
+  .grid{
+    grid-template-columns:repeat(3,1fr)
+  }
+}
+
+@media(max-width:650px){
+  .topbar{
+    padding:0 5vw
+  }
+
+  .main{
+    width:90vw;
+    padding-top:34px
+  }
+
+  .grid{
+    grid-template-columns:repeat(2,1fr)
+  }
+
+  .tutorial-grid{
+    grid-template-columns:1fr
+  }
+
+  .detail-head{
+    align-items:flex-start;
+    flex-wrap:wrap
+  }
+
+  .contact{
+    margin-left:0;
+    width:100%
+  }
+
+  .hero h1{
+    font-size:44px
+  }
+
+  .hero-card{
+    min-height:180px
+  }
+}
+</style>
 </head>
+
 <body>
 
-  <!-- Menu Lateral -->
-  <aside>
-    <div class="sidebar-title">Menu de Convênios</div>
-    <div class="nav-list">
-      <button class="tab-btn highlight-btn active" data-target="tab-telefones">📞 Central Telefônica</button>
-      <button class="tab-btn" data-target="tab-unimed-seguros">Unimed Seguros</button>
-      <button class="tab-btn" data-target="tab-alice">Alice</button>
-      <button class="tab-btn" data-target="tab-proasa">Proasa</button>
-      <button class="tab-btn" data-target="tab-amil">Amil</button>
-      <button class="tab-btn" data-target="tab-porto-seguro">Porto Seguro</button>
-      <button class="tab-btn" data-target="tab-bradesco">Bradesco Saúde</button>
-      <button class="tab-btn" data-target="tab-care-plus">Care Plus</button>
-      <button class="tab-btn" data-target="tab-orizon">Orizon / Itauseg</button>
-      <button class="tab-btn" data-target="tab-notredame">NotreDame / Savi</button>
-      <button class="tab-btn" data-target="tab-medsenior">MedSênior</button>
-      <button class="tab-btn" data-target="tab-abas">Abas</button>
-      <button class="tab-btn" data-target="tab-unafisco">Unafisco Saúde</button>
-      <button class="tab-btn" data-target="tab-vivest">Vivest</button>
-      <button class="tab-btn" data-target="tab-plan-assiste">Plan Assiste MPF</button>
-      <button class="tab-btn" data-target="tab-rnw">RNW</button>
-      <button class="tab-btn" data-target="tab-petrobras">Petrobras</button>
-      <button class="tab-btn" data-target="tab-medservice">MedService</button>
-      <button class="tab-btn" data-target="tab-gama">Gama Saúde</button>
-      <button class="tab-btn" data-target="tab-omint">Omint</button>
-      <button class="tab-btn" data-target="tab-cnu">CNU (Unimed)</button>
-      <button class="tab-btn" data-target="tab-afresp">Afresp</button>
-      <button class="tab-btn" data-target="tab-sulamerica">SulAmérica</button>
+<div class="app">
+
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark">C</div>
+
+    <div>
+      Central de Convênios
+      <small>Manual operacional do prestador</small>
     </div>
-  </aside>
+  </div>
 
-  <!-- Conteúdo Principal -->
-  <main>
-    <header>
-      <h1>Manual Operacional do Prestador</h1>
-      <p>Instruções passo a passo, capturas de tela e telefones de atendimento por operadora</p>
-    </header>
+  <div style="color:var(--muted);font-size:12px">
+    Protótipo v1
+  </div>
+</header>
 
-    <!-- TAB 1: TELEFONES -->
-    <div id="tab-telefones" class="tab-content active">
-      <div class="card">
-        <h2>Central Telefônica dos Convênios</h2>
-        <p>Pesquise o número de qualquer operadora abaixo:</p>
-        <br>
-        <input type="text" id="phoneSearch" class="search-input" placeholder="Digite o nome do convênio..." onkeyup="filterPhones()">
+<main class="main">
 
-        <table class="phone-table" id="phoneTable">
-          <thead>
-            <tr>
-              <th>Convênio / Operadora</th>
-              <th>Telefones e Canais de Contato</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td><strong>Unimed Seguros</strong></td><td>Top Saúde: (11) 3003-5303</td></tr>
-            <tr><td><strong>Alice</strong></td><td>(11) 4020-5270</td></tr>
-            <tr><td><strong>Proasa</strong></td><td>(61) 3701-1868 / (61) 3701-1800</td></tr>
-            <tr><td><strong>Amil</strong></td><td>(11) 3004-1028 NAC / (11) 3004-1050</td></tr>
-            <tr><td><strong>Porto Seguro</strong></td><td>(11) 3366-3633</td></tr>
-            <tr><td><strong>Bradesco Saúde</strong></td><td>(11) 4004-4580</td></tr>
-            <tr><td><strong>Care Plus</strong></td><td>0800 407 9000</td></tr>
-            <tr><td><strong>Orizon (Itauseg / Hospitau)</strong></td><td>(11) 4932-5014 / (11) 3003-7333 / 0800 701 9817</td></tr>
-            <tr><td><strong>NotreDame Intermédica / Savi</strong></td><td>NotreDame: (11) 3155-2355 | Savi: (11) 4002-3336</td></tr>
-            <tr><td><strong>MedSênior</strong></td><td>(27) 3025-5536 / (27) 99792-0267 / (11) 4007-2001</td></tr>
-            <tr><td><strong>Abas</strong></td><td>0800 591 5268 / (19) 99913-71355</td></tr>
-            <tr><td><strong>Unafisco Saúde</strong></td><td>0800 028 2777</td></tr>
-            <tr><td><strong>Vivest</strong></td><td>4004-0173</td></tr>
-            <tr><td><strong>Plan Assiste MPF</strong></td><td>(11) 2192-8925 / (11) 98413-2033 / (11) 3269-5309</td></tr>
-            <tr><td><strong>RNW</strong></td><td>(21) 2437-7374</td></tr>
-            <tr><td><strong>Petrobras</strong></td><td>0800 728 3372</td></tr>
-            <tr><td><strong>MedService</strong></td><td>4004-2710 | Recuperar Senha: 4004-2773</td></tr>
-            <tr><td><strong>Gama Saúde</strong></td><td>0800 722 0178 / 4004-0178</td></tr>
-            <tr><td><strong>Omint</strong></td><td>4004-4011 / (11) 2132-4141</td></tr>
-            <tr><td><strong>Central Nacional Unimed (CNU)</strong></td><td>(11) 2505-1111 / (11) 3478-9600</td></tr>
-            <tr><td><strong>Afresp</strong></td><td>(11) 3886-8800</td></tr>
-            <tr><td><strong>SulAmérica</strong></td><td>4004-5901</td></tr>
-          </tbody>
-        </table>
+<section class="home" id="home">
+
+<div class="hero">
+
+<div class="hero-copy">
+
+<div class="eyebrow">
+  Consulta rápida
+</div>
+
+<h1>
+  Encontre o convênio. Encontre o procedimento.
+</h1>
+
+<p>
+  Uma central simples para consultar tutoriais, contatos e orientações de cada convênio usado no hospital.
+</p>
+
+<label class="search">
+  <span>⌕</span>
+
+  <input
+    id="search"
+    placeholder="Pesquisar convênio..."
+    autocomplete="off"
+  >
+</label>
+
+</div>
+
+<div class="hero-card">
+
+<div>
+
+<div class="number">
+  22
+</div>
+
+<div style="font-size:17px;font-weight:800">
+  convênios cadastrados
+</div>
+
+<p>
+  O espaço dos logos já está preparado para receber a identidade visual de cada operadora.
+</p>
+
+</div>
+
+<div style="font-size:13px;opacity:.8">
+  Clique em qualquer convênio abaixo para visualizar o modelo.
+</div>
+
+</div>
+
+</div>
+
+<div class="section-head">
+
+<div>
+  <h2>Todos os convênios</h2>
+</div>
+
+<p id="count">
+  22 disponíveis
+</p>
+
+</div>
+
+<div class="grid" id="grid"></div>
+
+</section>
+
+
+<section class="detail" id="detail">
+
+<button class="back" id="back">
+  ← Voltar para convênios
+</button>
+
+<div class="detail-head">
+
+<div class="detail-logo" id="dLogo">
+  BR
+</div>
+
+<div>
+
+<h1 id="dName">
+  Bradesco
+</h1>
+
+<p id="dSub">
+  Manual operacional
+</p>
+
+</div>
+
+<div class="contact" id="dPhone">
+  ☎ (11) 4004-4580
+</div>
+
+</div>
+
+
+<div class="tutorial-grid">
+
+<article class="tutorial">
+
+<div class="icon">
+  📖
+</div>
+
+<h3>
+  Tutorial
+</h3>
+
+<p id="tutorialText">
+  Selecione um convênio para visualizar o tutorial.
+</p>
+
+</article>
+
+
+<article class="tutorial">
+
+<div class="icon">
+  ☎
+</div>
+
+<h3>
+  Telefones
+</h3>
+
+<p id="dPhone2">
+  (11) 4004-4580
+</p>
+
+</article>
+
+</div>
+
+</section>
+
+</main>
+
+</div>
+
+
+<script>
+
+const convenios=[
+
+[
+  'Unimed Seguros - Top Saúde',
+  '(11) 3003-5303',
+  'US'
+],
+
+[
+  'Alice',
+  '(11) 4020-5270',
+  'AL'
+],
+
+[
+  'Proasa',
+  '(61) 3701-1868 / (61) 3701-1800',
+  'PR'
+],
+
+[
+  'Amil',
+  '(11) 3004-1028 NAC / (11) 3004-1050',
+  'AM'
+],
+
+[
+  'Porto Seguro',
+  '(11) 3366-3633',
+  'PS'
+],
+
+[
+  'Bradesco',
+  '(11) 4004-4580',
+  'BR'
+],
+
+[
+  'Care Plus',
+  '0800 407 9000',
+  'CP'
+],
+
+[
+  'Orizon / Itaúseg',
+  '(11) 4932-5014 / (11) 3003-7333 / 0800 701 9817',
+  'OI'
+],
+
+[
+  'NotreDame',
+  '(11) 3155-2355 / Savi (11) 4002-3336',
+  'ND'
+],
+
+[
+  'MedSenior',
+  '(27) 3025-5536 / (27) 99792-0267 / (11) 4007-2001',
+  'MS'
+],
+
+[
+  'Abas',
+  '0800 591 5268 / (19) 99913-7135',
+  'AB'
+],
+
+[
+  'Unafisco Saúde',
+  '0800 028 2777',
+  'UN'
+],
+
+[
+  'Vivest',
+  '4004-0173',
+  'VI'
+],
+
+[
+  'Plan Assiste MPF',
+  '(21) 2192-8925 / (21) 98413-2033 / (21) 3269-5309',
+  'PA'
+],
+
+[
+  'RNW',
+  '(21) 2437-7374',
+  'RN'
+],
+
+[
+  'Petrobras',
+  '0800 728 3372',
+  'PB'
+],
+
+[
+  'MedService',
+  '4004-2710 / Recuperar senha: 4004-2773',
+  'MD'
+],
+
+[
+  'Gama Saúde',
+  '0800 722 0178 / 4004-0178',
+  'GA'
+],
+
+[
+  'Omint',
+  '4004-4011 / (21) 2132-4141',
+  'OM'
+],
+
+[
+  'Central Nacional Unimed - CNU',
+  '2505-1111 / (11) 3478-9600',
+  'CNU'
+],
+
+[
+  'Afresp',
+  '(11) 3886-8800',
+  'AF'
+],
+
+[
+  'Sul América',
+  '4004-5901',
+  'SA'
+]
+
+];
+
+
+const grid =
+  document.getElementById('grid');
+
+const search =
+  document.getElementById('search');
+
+const count =
+  document.getElementById('count');
+
+
+function render(q=''){
+
+  grid.innerHTML='';
+
+  const items =
+    convenios.filter(
+      x =>
+        x[0]
+        .toLowerCase()
+        .includes(q.toLowerCase())
+    );
+
+  count.textContent =
+    items.length +
+    ' disponível' +
+    (items.length === 1 ? '' : 'is');
+
+  if(!items.length){
+
+    grid.innerHTML =
+      '<div class="empty">Nenhum convênio encontrado.</div>';
+
+    return;
+  }
+
+  items.forEach(x => {
+
+    const c =
+      document.createElement('article');
+
+    c.className='card';
+
+    c.innerHTML=`
+
+      <div class="logo-slot">
+        ${x[2]}
       </div>
-    </div>
 
-    <!-- UNIMED SEGUROS -->
-    <div id="tab-unimed-seguros" class="tab-content">
-      <div class="card">
-        <h2>Unimed Seguros</h2>
-        <p>Escreva aqui o passo a passo da Unimed Seguros.</p>
-        <div class="img-box">
-          <img src="unimed-seguros-tela.png" alt="Unimed Seguros" onerror="this.src='https://via.placeholder.com/800x300?text=Suba+a+imagem+unimed-seguros-tela.png+no+GitHub'">
-          <div class="img-caption">Tela do portal Unimed Seguros</div>
-        </div>
-      </div>
-    </div>
+      <h3>
+        ${x[0]}
+      </h3>
 
-    <!-- ALICE -->
-    <div id="tab-alice" class="tab-content">
-      <div class="card">
-        <h2>Alice</h2>
-        <p>Escreva aqui o passo a passo da Alice.</p>
-        <div class="img-box">
-          <img src="alice-tela.png" alt="Alice" onerror="this.src='https://via.placeholder.com/800x300?text=Suba+a+imagem+alice-tela.png+no+GitHub'">
-          <div class="img-caption">Tela do portal Alice</div>
-        </div>
-      </div>
-    </div>
+      <p>
+        ${x[1]}
+      </p>
 
-    <!-- PROASA -->
-    <div id="tab-proasa" class="tab-content">
-      <div class="card">
-        <h2>Proasa</h2>
-        <p>Escreva aqui o passo a passo do Proasa.</p>
-        <div class="img-box">
-          <img src="proasa-tela.png" alt="Proasa" onerror="this.src='https://via.placeholder.com/800x300?text=Suba+a+imagem+proasa-tela.png+no+GitHub'">
-          <div class="img-caption">Tela do portal Proasa</div>
-        </div>
-      </div>
-    </div>
+    `;
 
-    <!-- AMIL -->
-    <div id="tab-amil" class="tab-content">
-      <div class="card">
-        <h2>Amil</h2>
-        <p>Escreva aqui o passo a passo da Amil.</p>
-        <div class="img-box">
-          <img src="amil-tela.png" alt="Amil" onerror="this.src='https://via.placeholder.com/800x300?text=Suba+a+imagem+amil-tela.png+no+GitHub'">
-          <div class="img-caption">Tela do portal Amil</div>
-        </div>
-      </div>
-    </div>
+    c.onclick =
+      () => openDetail(x);
 
-    <!-- PORTO SEGURO -->
-    <div id="tab-porto-seguro" class="tab-content">
-      <div class="card">
-        <h2>Porto Seguro</h2>
-        <p>Escreva aqui o passo a passo da Porto Seguro.</p>
+    grid.appendChild(c);
+
+  });
+
+}
+
+
+/*
+==================================================
+TUTORIAIS
+Cada convênio possui 8 espaços editáveis.
+Basta trocar o texto entre as aspas.
+==================================================
+*/
+
+const tutoriais={
+
+
+Bradesco:[
+
+'Situação do Beneficiário e colocar Número do Cartão ou CPF: Buscar da Elegibilidade e imprimir ela.',
+
+'Solicitar nova senha WEB.',
+
+'Selecionar o código do referenciado 0000190616 e solicitar internação.',
+
+'',
+
+'',
+
+'',
+
+'',
+
+''
+
+],
+
+
+Alice:[
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+''
+],
+
+
+'Unimed Seguros - Top Saúde':[
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+''
+],
+
+
+Proasa:[
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+''
+],
+
+
+Amil:[
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+''
+],
+
+
+'Porto Seguro':[
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+''
+],
+
+
+'Care Plus':[
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+''
+],
+
+
+'Orizon / Itaúseg':[
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+''
+],
+
+
+NotreDame:[
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+''
+],
+
+
+MedSenior:[
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+''
+],
+
+
+Abas:[
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+''
+],
+
+
+'Unafisco Saúde':[
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+''
+],
+
+
+Vivest:[
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+''
+],
+
+
+'Plan Assiste MPF':[
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+''
+],
+
+
+RNW:[
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+''
+],
+
+
+Petrobras:[
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+''
+],
+
+
+MedService:[
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+''
+],
+
+
+'Gama Saúde':[
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+''
+],
+
+
+Omint:[
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+''
+],
+
+
+'Central Nacional Unimed - CNU':[
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+''
+],
+
+
+Afresp:[
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+''
+],
+
+
+'Sul América':[
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+''
+
+]
+
+};
+
+
+function tutorialHtml(nome){
+
+  const passos =
+    tutoriais[nome] || [];
+
+  return passos.map(
+    (p,i) =>
+
+      '<div style="margin-bottom:16px">' +
+
+      '<strong>' +
+      (i+1) +
+      'º</strong> ' +
+
+      (
+        p ||
+        '<span style="opacity:.45">Passo ainda não cadastrado.</span>'
+      ) +
+
+      '</div>'
+
+  ).join('');
+
+}
+
+
+function openDetail(x){
+
+  document
+    .getElementById('home')
+    .classList
+    .add('hidden');
+
+  document
+    .getElementById('detail')
+    .classList
+    .add('active');
+
+  document
+    .getElementById('dName')
+    .textContent=x[0];
+
+  document
+    .getElementById('dLogo')
+    .textContent=x[2];
+
+  document
+    .getElementById('dPhone')
+    .textContent='☎ '+x[1];
+
+  document
+    .getElementById('dPhone2')
+    .textContent=x[1];
+
+  document
+    .getElementById('tutorialText')
+    .innerHTML=tutorialHtml(x[0]);
+
+  window.scrollTo({
+    top:0,
+    behavior:'smooth'
+  });
+
+}
+
+
+document
+  .getElementById('back')
+  .onclick=()=>{
+
+    document
+      .getElementById('detail')
+      .classList
+      .remove('active');
+
+    document
+      .getElementById('home')
+      .classList
+      .remove('hidden');
+
+    window.scrollTo({
+      top:0,
+      behavior:'smooth'
+    });
+
+  };
+
+
+search.oninput =
+  e => render(e.target.value);
+
+
+render();
+
+</script>
+
+</body>
+</html>
