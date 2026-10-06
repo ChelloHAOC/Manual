@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portal de Convênios - Guia do Prestador</title>
+  <title>Manual do Prestador - Portais de Convênios</title>
   <style>
     :root {
       --primary: #0056b3;
@@ -30,46 +30,49 @@
     header {
       background: linear-gradient(135deg, var(--primary-dark), var(--primary));
       color: white;
-      padding: 30px 20px 15px 20px;
+      padding: 25px 20px 15px 20px;
       text-align: center;
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
 
     header h1 {
-      font-size: 2rem;
-      margin-bottom: 8px;
+      font-size: 1.8rem;
+      margin-bottom: 6px;
     }
 
     header p {
       opacity: 0.9;
-      font-size: 1rem;
+      font-size: 0.95rem;
     }
 
-    /* Navegação por Abas (Convenios) */
-    .tabs-container {
+    /* Navegação por Abas */
+    .tabs-wrapper {
       background: white;
       border-bottom: 2px solid var(--border-color);
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 5px;
-      padding: 10px 10px 0 10px;
       position: sticky;
       top: 0;
       z-index: 100;
       box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .tabs-container {
+      display: inline-flex;
+      padding: 8px 10px 0 10px;
+      gap: 4px;
     }
 
     .tab-btn {
       background: none;
       border: none;
-      padding: 12px 24px;
-      font-size: 1rem;
+      padding: 10px 16px;
+      font-size: 0.9rem;
       font-weight: 600;
       color: #64748b;
       cursor: pointer;
       border-bottom: 3px solid transparent;
-      transition: all 0.3s ease;
+      transition: all 0.2s ease;
       border-radius: 4px 4px 0 0;
     }
 
@@ -84,16 +87,23 @@
       background-color: #ffffff;
     }
 
+    .tab-btn.highlight {
+      background-color: #eff6ff;
+      color: var(--primary-dark);
+      border: 1px solid #bfdbfe;
+      border-bottom: 3px solid var(--primary);
+    }
+
     /* Área de Conteúdo */
     main {
       max-width: 1100px;
-      margin: 30px auto;
+      margin: 25px auto;
       padding: 0 20px;
     }
 
     .tab-content {
       display: none;
-      animation: fadeIn 0.4s ease;
+      animation: fadeIn 0.3s ease;
     }
 
     .tab-content.active {
@@ -101,88 +111,102 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
+      from { opacity: 0; transform: translateY(6px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     /* Cards e Seções */
     .card {
       background: white;
-      padding: 28px;
-      border-radius: 10px;
-      margin-bottom: 24px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      padding: 24px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
       border: 1px solid var(--border-color);
     }
 
     .card h2 {
       color: var(--primary-dark);
-      font-size: 1.4rem;
-      margin-bottom: 16px;
+      font-size: 1.3rem;
+      margin-bottom: 12px;
       border-bottom: 2px solid #edf2f7;
-      padding-bottom: 8px;
+      padding-bottom: 6px;
     }
 
     ol, ul {
       margin-left: 20px;
-      margin-bottom: 16px;
-      line-height: 1.7;
+      margin-bottom: 14px;
+      line-height: 1.6;
     }
 
     li {
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
-    /* Estilo para Imagens e Screenshots */
+    /* Caixa de Imagem */
     .img-box {
-      margin: 20px 0;
+      margin: 18px 0;
       text-align: center;
       background: #f8fafc;
-      padding: 12px;
-      border-radius: 8px;
+      padding: 10px;
+      border-radius: 6px;
       border: 1px dashed #cbd5e1;
     }
 
     .img-box img {
       max-width: 100%;
       height: auto;
-      border-radius: 6px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      border-radius: 4px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
 
     .img-caption {
-      margin-top: 8px;
-      font-size: 0.88rem;
+      margin-top: 6px;
+      font-size: 0.85rem;
       color: #64748b;
       font-style: italic;
     }
 
-    /* Tabelas */
-    table {
+    /* Tabela de Telefones */
+    .phone-table {
       width: 100%;
       border-collapse: collapse;
-      margin: 20px 0;
+      margin-top: 15px;
     }
 
-    th, td {
+    .phone-table th, .phone-table td {
       border: 1px solid var(--border-color);
-      padding: 12px;
+      padding: 10px 14px;
       text-align: left;
+      font-size: 0.92rem;
     }
 
-    th {
+    .phone-table th {
       background-color: #f1f5f9;
       color: var(--primary-dark);
+    }
+
+    .phone-table tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      margin-bottom: 15px;
+      font-size: 0.95rem;
     }
 
     /* Destaques */
     .alert-box {
       background-color: #fef3c7;
       border-left: 4px solid #f59e0b;
-      padding: 14px;
+      padding: 12px;
       border-radius: 4px;
-      margin: 16px 0;
-      font-size: 0.95rem;
+      margin: 14px 0;
+      font-size: 0.9rem;
     }
 
     code {
@@ -192,142 +216,129 @@
       font-family: monospace;
       color: #0284c7;
     }
-
-    @media (max-width: 600px) {
-      .tab-btn {
-        padding: 10px 14px;
-        font-size: 0.9rem;
-        flex: 1 1 auto;
-      }
-    }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>Manual Operacional de Convênios</h1>
-    <p>Instruções passo a passo, como solicitar na operadora as internações do Pronto Atendimento</p>
+    <h1>Manual Operacional do Prestador</h1>
+    <p>Guias de utilização dos portais de convênios, contatos e faturamento TISS</p>
   </header>
 
-  <!-- Menu Superior de Abas por Convênio -->
-  <div class="tabs-container">
-    <button class="tab-btn active" onclick="openTab(event, 'geral')">📌 Orientações Gerais</button>
-    <button class="tab-btn" onclick="openTab(event, 'notredame')">NotreDame Intermédica</button>
-    <button class="tab-btn" onclick="openTab(event, 'unimed')">Unimed</button>
-    <button class="tab-btn" onclick="openTab(event, 'amil')">Amil</button>
-    <button class="tab-btn" onclick="openTab(event, 'bradesco')">Bradesco Saúde</button>
-    <button class="tab-btn" onclick="openTab(event, 'SulAmerica')">SulAmerica</button>
-    <button class="tab-btn" onclick="openTab(event, 'Omnit')">Omnit</button>
-    <button class="tab-btn" onclick="openTab(event, 'Porto Seguro')">Porto Seguro</button>
-    <button class="tab-btn" onclick="openTab(event, 'Abas')">Abas</button>
+  <!-- Barra de Abas Rolável -->
+  <div class="tabs-wrapper">
+    <div class="tabs-container">
+      <button class="tab-btn highlight active" onclick="openTab(event, 'telefones')">📞 Telefones e Contatos</button>
+      <button class="tab-btn" onclick="openTab(event, 'unimed-seguros')">Unimed Seguros</button>
+      <button class="tab-btn" onclick="openTab(event, 'alice')">Alice</button>
+      <button class="tab-btn" onclick="openTab(event, 'proasa')">Proasa</button>
+      <button class="tab-btn" onclick="openTab(event, 'amil')">Amil</button>
+      <button class="tab-btn" onclick="openTab(event, 'porto-seguro')">Porto Seguro</button>
+      <button class="tab-btn" onclick="openTab(event, 'bradesco')">Bradesco</button>
+      <button class="tab-btn" onclick="openTab(event, 'care-plus')">Care Plus</button>
+      <button class="tab-btn" onclick="openTab(event, 'orizon')">Orizon / Itauseg</button>
+      <button class="tab-btn" onclick="openTab(event, 'notredame')">NotreDame / Savi</button>
+      <button class="tab-btn" onclick="openTab(event, 'medsenior')">MedSênior</button>
+      <button class="tab-btn" onclick="openTab(event, 'abas')">Abas</button>
+      <button class="tab-btn" onclick="openTab(event, 'unafisco')">Unafisco Saúde</button>
+      <button class="tab-btn" onclick="openTab(event, 'vivest')">Vivest</button>
+      <button class="tab-btn" onclick="openTab(event, 'plan-assiste')">Plan Assiste MPF</button>
+      <button class="tab-btn" onclick="openTab(event, 'rnw')">RNW</button>
+      <button class="tab-btn" onclick="openTab(event, 'petrobras')">Petrobras</button>
+      <button class="tab-btn" onclick="openTab(event, 'medservice')">MedService</button>
+      <button class="tab-btn" onclick="openTab(event, 'gama')">Gama Saúde</button>
+      <button class="tab-btn" onclick="openTab(event, 'omint')">Omint</button>
+      <button class="tab-btn" onclick="openTab(event, 'cnu')">CNU (Unimed)</button>
+      <button class="tab-btn" onclick="openTab(event, 'afresp')">Afresp</button>
+      <button class="tab-btn" onclick="openTab(event, 'sulamerica')">SulAmérica</button>
+    </div>
   </div>
 
   <main>
-    <!-- ABA 1: ORIENTAÇÕES GERAIS -->
-    <div id="geral" class="tab-content active">
+    <!-- ABA TELEFONES E CONTATOS -->
+    <div id="telefones" class="tab-content active">
       <div class="card">
-        <h2>Visão Geral do Padrão TISS</h2>
-        <p>Este manual reúne o fluxo completo de atendimento para prestadores credenciados, operando de acordo com as regras estabelecidas pela Agência Nacional de Saúde Suplementar (ANS).</p>
-      </div>
+        <h2>Central Telefônica de Atendimento aos Convênios</h2>
+        <p>Utilize o campo abaixo para pesquisar rapidamente o número de telefone de qualquer operadora:</p>
+        <br>
+        <input type="text" id="phoneSearch" class="search-input" placeholder="Digite o nome do convênio..." onkeyup="filterPhones()">
 
+        <table class="phone-table" id="phoneTable">
+          <thead>
+            <tr>
+              <th>Convênio / Operadora</th>
+              <th>Telefones e Canais de Contato</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Unimed Seguros</strong></td><td>Top Saúde: (11) 3003-5303</td></tr>
+            <tr><td><strong>Alice</strong></td><td>(11) 4020-5270</td></tr>
+            <tr><td><strong>Proasa</strong></td><td>(61) 3701-1868 / (61) 3701-1800</td></tr>
+            <tr><td><strong>Amil</strong></td><td>(11) 3004-1028 NAC / (11) 3004-1050</td></tr>
+            <tr><td><strong>Porto Seguro</strong></td><td>(11) 3366-3633</td></tr>
+            <tr><td><strong>Bradesco Saúde</strong></td><td>(11) 4004-4580</td></tr>
+            <tr><td><strong>Care Plus</strong></td><td>0800 407 9000</td></tr>
+            <tr><td><strong>Orizon (Itauseg / Hospitau)</strong></td><td>(11) 4932-5014 / (11) 3003-7333 / 0800 701 9817</td></tr>
+            <tr><td><strong>NotreDame Intermédica / Savi</strong></td><td>NotreDame: (11) 3155-2355 | Savi: (11) 4002-3336</td></tr>
+            <tr><td><strong>MedSênior</strong></td><td>(27) 3025-5536 / (27) 99792-0267 / (11) 4007-2001</td></tr>
+            <tr><td><strong>Abas</strong></td><td>0800 591 5268 / (19) 99913-71355</td></tr>
+            <tr><td><strong>Unafisco Saúde</strong></td><td>0800 028 2777</td></tr>
+            <tr><td><strong>Vivest</strong></td><td>4004-0173</td></tr>
+            <tr><td><strong>Plan Assiste MPF</strong></td><td>(11) 2192-8925 / (11) 98413-2033 / (11) 3269-5309</td></tr>
+            <tr><td><strong>RNW</strong></td><td>(21) 2437-7374</td></tr>
+            <tr><td><strong>Petrobras</strong></td><td>0800 728 3372</td></tr>
+            <tr><td><strong>MedService</strong></td><td>4004-2710 | Recuperar Senha: 4004-2773</td></tr>
+            <tr><td><strong>Gama Saúde</strong></td><td>0800 722 0178 / 4004-0178</td></tr>
+            <tr><td><strong>Omint</strong></td><td>4004-4011 / (11) 2132-4141</td></tr>
+            <tr><td><strong>Central Nacional Unimed (CNU)</strong></td><td>(11) 2505-1111 / (11) 3478-9600</td></tr>
+            <tr><td><strong>Afresp</strong></td><td>(11) 3886-8800</td></tr>
+            <tr><td><strong>SulAmérica</strong></td><td>4004-5901</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- MODELO DE ABA PARA CADA CONVÊNIO (EDITÁVEL) -->
+
+    <!-- UNIMED SEGUROS -->
+    <div id="unimed-seguros" class="tab-content">
       <div class="card">
-        <h2>Fluxo Padrão de Atendimento</h2>
+        <h2>Unimed Seguros</h2>
+        <p>Instruções para autorização de guias e elegibilidade no portal Unimed Seguros.</p>
+        <div class="img-box">
+          <img src="unimed-seguros-tela.png" alt="Portal Unimed Seguros" onerror="this.src='https://via.placeholder.com/800x300?text=Suba+a+imagem+unimed-seguros-tela.png+no+GitHub'">
+          <div class="img-caption">Tela inicial do portal de autorizações Unimed Seguros.</div>
+        </div>
+        <h3>Passos para Autorização:</h3>
         <ol>
-          <li><strong>Validação de Elegibilidade:</strong> Verificação do cartão e status do beneficiário.</li>
-          <li><strong>Solicitação de Autorização:</strong> Emissão de senha prévia para consultas, SADT e internações.</li>
-          <li><strong>Execução do Atendimento:</strong> Coleta da assinatura física/digital do paciente.</li>
-          <li><strong>Faturamento Web:</strong> Envio dos lotes XML TISS e acompanhamento de relatórios.</li>
+          <li>Acesse a aba de elegibilidade e insira o número da carteirinha.</li>
+          <li>Verifique a acomodação e cobertura do plano Top Saúde.</li>
         </ol>
       </div>
     </div>
 
-    <!-- ABA 2: NOTREDAME INTERMÉDICA -->
-    <div id="notredame" class="tab-content">
+    <!-- ALICE -->
+    <div id="alice" class="tab-content">
       <div class="card">
-        <h2>Portal NotreDame Intermédica (GNDI)</h2>
-        <p>Instruções para Solicitação de Internação e Elegibilidade.</p>
-        
-        <!-- Exemplo de Imagem do Portal -->
+        <h2>Alice</h2>
+        <p>Procedimentos de autorização para o ecossistema Alice.</p>
         <div class="img-box">
-          <img src="notredame-tela1.png" alt="Tela do Portal GNDI" onerror="this.src='https://via.placeholder.com/800x350?text=Suba+a+imagem+notredame-tela1.png+no+GitHub'">
-          <div class="img-caption">Figura 1: Tela inicial de acesso e menu de elegibilidade GNDI.</div>
-        </div>
-
-        <h3>Passo a Passo de Elegibilidade:</h3>
-        <ol>
-          <li>Acesse a área logada do prestador.</li>
-          <li>Clique em Menu, Elegibilidade do Beneficiario (19 dígitos, ex.: <code>9702818400000226000</code>).</li>
-          <li>Verifique a acomodação autorizada (Enfermaria/Apartamento) e carências.</li>
-        </ol>
-      </div>
-
-      <div class="card">
-        <h2>Digitação de Guias SP/SADT</h2>
-        <div class="alert-box">
-          <strong>Atenção:</strong> Sempre informe o CRM do médico solicitante (Ex.: CRM/SP 139532) e o código TUSS exato do procedimento.
+          <img src="alice-tela.png" alt="Portal Alice" onerror="this.src='https://via.placeholder.com/800x300?text=Suba+a+imagem+alice-tela.png+no+GitHub'">
+          <div class="img-caption">Painel do prestador Alice.</div>
         </div>
       </div>
     </div>
 
-    <!-- ABA 3: UNIMED -->
-    <div id="unimed" class="tab-content">
+    <!-- PROASA -->
+    <div id="proasa" class="tab-content">
       <div class="card">
-        <h2>Portal Unimed</h2>
-        <p>Procedimentos para validação e solicitação de autorizações na Unimed.</p>
-
+        <h2>Proasa</h2>
+        <p>Instruções do portal Proasa.</p>
         <div class="img-box">
-          <img src="unimed-tela1.png" alt="Tela do Portal Unimed" onerror="this.src='https://via.placeholder.com/800x350?text=Suba+a+imagem+unimed-tela1.png+no+GitHub'">
-          <div class="img-caption">Figura 2: Portal de autorização de guias Unimed.</div>
-        </div>
-
-        <h3>Passo a Passo:</h3>
-        <ol>
-          <li>Consulte o cartão Unimed de 17 dígitos.</li>
-          <li>Gere a guia de solicitação de internação ou procedimento SADT.</li>
-          <li>Confira a data de validade da senha gerada.</li>
-        </ol>
-      </div>
-    </div>
-
-    <!-- ABA 4: AMIL -->
-    <div id="amil" class="tab-content">
-      <div class="card">
-        <h2>Portal Amil Prestador</h2>
-        <p>Navegação e autorização de exames/consultas no sistema Amil.</p>
-        
-        <div class="img-box">
-          <img src="amil-tela1.png" alt="Tela do Portal Amil" onerror="this.src='https://via.placeholder.com/800x350?text=Suba+a+imagem+amil-tela1.png+no+GitHub'">
-          <div class="img-caption">Figura 3: Sistema de faturamento e elegibilidade Amil.</div>
+          <img src="proasa-tela.png" alt="Portal Proasa" onerror="this.src='https://via.placeholder.com/800x300?text=Suba+a+imagem+proasa-tela.png+no+GitHub'">
+          <div class="img-caption">Interface de envio de guias Proasa.</div>
         </div>
       </div>
     </div>
 
-    <!-- ABA 5: BRADESCO SAÚDE -->
-    <div id="bradesco" class="tab-content">
-      <div class="card">
-        <h2>Portal Bradesco Saúde</h2>
-        <p>Guia de operação no sistema Bradesco Saúde TISS.</p>
-
-        <div class="img-box">
-          <img src="bradesco-tela1.png" alt="Tela Bradesco Saúde" onerror="this.src='https://via.placeholder.com/800x350?text=Suba+a+imagem+bradesco-tela1.png+no+GitHub'">
-          <div class="img-caption">Figura 4: Tela de digitação TISS Bradesco Saúde.</div>
-        </div>
-      </div>
-    </div>
-  </main>
-
-  <script>
-    // Lógica para alternar entre as abas
-    function openTab(evt, tabName) {
-      const tabContents = document.querySelectorAll('.tab-content');
-      tabContents.forEach(content => content.classList.remove('active'));
-
-      const tabBtns = document.querySelectorAll('.tab-btn');
-      tabBtns.forEach(btn => btn.classList.remove('active'));
-
-      document.getElementById(tabName).classList.add('active');
-      evt.currentTarget.classList.add('active');
-    }
-  </script>
-</body>
-</html>
+    <!-- AMIL -->
