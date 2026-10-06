@@ -3,141 +3,165 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Manual do Prestador - Portal de Convênios</title>
+  <title>Portal de Convênios - Guia do Prestador</title>
   <style>
     :root {
       --primary: #0056b3;
       --primary-dark: #003d80;
-      --bg-light: #f8f9fa;
-      --text-color: #333;
-      --border-color: #e0e0e0;
-      --sidebar-width: 280px;
+      --bg-light: #f4f6f9;
+      --text-color: #2c3e50;
+      --border-color: #e2e8f0;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     }
 
     body {
-      display: flex;
       background-color: var(--bg-light);
       color: var(--text-color);
       min-height: 100vh;
     }
 
-    /* Sidebar Sidebar */
-    aside {
-      width: var(--sidebar-width);
-      background: #ffffff;
-      border-right: 1px solid var(--border-color);
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      display: flex;
-      flex-direction: column;
-      padding: 20px;
-      overflow-y: auto;
-    }
-
-    aside h2 {
-      font-size: 1.2rem;
-      color: var(--primary);
-      margin-bottom: 20px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid var(--primary);
-    }
-
-    aside nav a {
-      display: block;
-      padding: 10px 12px;
-      color: #555;
-      text-decoration: none;
-      border-radius: 6px;
-      margin-bottom: 5px;
-      font-size: 0.95rem;
-      transition: all 0.2s ease;
-    }
-
-    aside nav a:hover, aside nav a.active {
-      background-color: #e9f2ff;
-      color: var(--primary);
-      font-weight: 600;
-    }
-
-    /* Main Content */
-    main {
-      margin-left: var(--sidebar-width);
-      flex: 1;
-      padding: 40px;
-      max-width: 1000px;
-    }
-
+    /* Cabeçalho */
     header {
-      margin-bottom: 30px;
-      background: #fff;
-      padding: 24px;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: white;
+      padding: 30px 20px 15px 20px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
 
     header h1 {
-      color: var(--primary-dark);
-      font-size: 1.8rem;
+      font-size: 2rem;
       margin-bottom: 8px;
     }
 
     header p {
-      color: #666;
+      opacity: 0.9;
+      font-size: 1rem;
     }
 
-    .search-box {
-      margin-top: 15px;
-    }
-
-    .search-box input {
-      width: 100%;
-      padding: 10px 14px;
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      font-size: 0.95rem;
-    }
-
-    section {
-      background: #fff;
-      padding: 28px;
-      border-radius: 8px;
-      margin-bottom: 24px;
+    /* Navegação por Abas (Convenios) */
+    .tabs-container {
+      background: white;
+      border-bottom: 2px solid var(--border-color);
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 5px;
+      padding: 10px 10px 0 10px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
       box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
 
-    section h2 {
+    .tab-btn {
+      background: none;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #64748b;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s ease;
+      border-radius: 4px 4px 0 0;
+    }
+
+    .tab-btn:hover {
       color: var(--primary);
+      background-color: #f8fafc;
+    }
+
+    .tab-btn.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+      background-color: #ffffff;
+    }
+
+    /* Área de Conteúdo */
+    main {
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Cards e Seções */
+    .card {
+      background: white;
+      padding: 28px;
+      border-radius: 10px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border: 1px solid var(--border-color);
+    }
+
+    .card h2 {
+      color: var(--primary-dark);
+      font-size: 1.4rem;
       margin-bottom: 16px;
-      font-size: 1.3rem;
-      border-bottom: 1px solid var(--border-color);
+      border-bottom: 2px solid #edf2f7;
       padding-bottom: 8px;
     }
 
     ol, ul {
       margin-left: 20px;
       margin-bottom: 16px;
-      line-height: 1.6;
+      line-height: 1.7;
     }
 
     li {
       margin-bottom: 8px;
     }
 
-    /* Table Styling */
+    /* Estilo para Imagens e Screenshots */
+    .img-box {
+      margin: 20px 0;
+      text-align: center;
+      background: #f8fafc;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px dashed #cbd5e1;
+    }
+
+    .img-box img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 6px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .img-caption {
+      margin-top: 8px;
+      font-size: 0.88rem;
+      color: #64748b;
+      font-style: italic;
+    }
+
+    /* Tabelas */
     table {
       width: 100%;
       border-collapse: collapse;
       margin: 20px 0;
-      font-size: 0.95rem;
     }
 
     th, td {
@@ -147,163 +171,158 @@
     }
 
     th {
-      background-color: #f2f6fa;
+      background-color: #f1f5f9;
       color: var(--primary-dark);
     }
 
-    tr:nth-child(even) {
-      background-color: #fcfcfc;
-    }
-
-    /* Alerts */
+    /* Destaques */
     .alert-box {
-      background-color: #fff8e6;
-      border-left: 4px solid #ffc107;
+      background-color: #fef3c7;
+      border-left: 4px solid #f59e0b;
       padding: 14px;
       border-radius: 4px;
       margin: 16px 0;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
     }
 
     code {
-      background: #f1f3f5;
+      background: #f1f5f9;
       padding: 2px 6px;
       border-radius: 4px;
       font-family: monospace;
-      color: #d63384;
+      color: #0284c7;
     }
 
-    /* Responsive */
-    @media (max-width: 768px) {
-      body {
-        flex-direction: column;
-      }
-      aside {
-        width: 100%;
-        position: relative;
-        border-right: none;
-        border-bottom: 1px solid var(--border-color);
-      }
-      main {
-        margin-left: 0;
-        padding: 20px;
+    @media (max-width: 600px) {
+      .tab-btn {
+        padding: 10px 14px;
+        font-size: 0.9rem;
+        flex: 1 1 auto;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Menu Lateral -->
-  <aside>
-    <h2>Manual do Portal</h2>
-    <nav>
-      <a href="#overview">1. Visão Geral</a>
-      <a href="#elegibilidade">2. Elegibilidade</a>
-      <a href="#guias">3. Digitação de Guias</a>
-      <a href="#faturamento">4. Faturamento Web</a>
-      <a href="#dicas">5. Boas Práticas</a>
-    </nav>
-  </aside>
+  <header>
+    <h1>Manual Operacional de Convênios</h1>
+    <p>Instruções passo a passo, digitação de guias TISS e faturamento por operadora</p>
+  </header>
 
-  <!-- Conteúdo Principal -->
+  <!-- Menu Superior de Abas por Convênio -->
+  <div class="tabs-container">
+    <button class="tab-btn active" onclick="openTab(event, 'geral')">📌 Orientações Gerais</button>
+    <button class="tab-btn" onclick="openTab(event, 'notredame')">NotreDame Intermédica</button>
+    <button class="tab-btn" onclick="openTab(event, 'unimed')">Unimed</button>
+    <button class="tab-btn" onclick="openTab(event, 'amil')">Amil</button>
+    <button class="tab-btn" onclick="openTab(event, 'bradesco')">Bradesco Saúde</button>
+  </div>
+
   <main>
-    <header>
-      <h1>Manual Operacional do Prestador</h1>
-      <p>Guia de navegação, digitação TISS e gestão de faturamento nos portais de convenios.</p>
-      <div class="search-box">
-        <input type="text" id="searchInput" placeholder="Pesquisar termo, código ou dúvida..." onkeyup="filterContent()">
+    <!-- ABA 1: ORIENTAÇÕES GERAIS -->
+    <div id="geral" class="tab-content active">
+      <div class="card">
+        <h2>Visão Geral do Padrão TISS</h2>
+        <p>Este manual reúne o fluxo completo de atendimento para prestadores credenciados, operando de acordo com as regras estabelecidas pela Agência Nacional de Saúde Suplementar (ANS).</p>
       </div>
-    </header>
 
-    <section id="overview">
-      <h2>1. Visão Geral do Portal</h2>
-      <p>O Portal do Prestador de Serviços de Saúde gerencia a rotina de atendimento junto às operadoras (NotreDame Intermédica, Unimed, Bradesco Saúde, Amil, etc.) no padrão <strong>TISS (Troca de Informação de Saúde Suplementar)</strong>.</p>
-      <br>
-      <ul>
-        <li><strong>Elegibilidade:</strong> Consulta rápida de status e cobertura do beneficiário.</li>
-        <li><strong>Autorizações:</strong> Solicitação e emissão de senhas para exames e consultas.</li>
-        <li><strong>Faturamento:</strong> Envio de arquivos XML e fechamento de lotes.</li>
-      </ul>
-    </section>
-
-    <section id="elegibilidade">
-      <h2>2. Verificação de Elegibilidade</h2>
-      <ol>
-        <li>Acesse o menu <strong>Elegibilidade / Validação de Beneficiário</strong>.</li>
-        <li>Insira a carteirinha do paciente (ex.: <code>9702818400000226000</code>).</li>
-        <li>Confira a validade da carteira, a acomodação autorizada (Enfermaria/Apartamento) e se há carências.</li>
-      </ol>
-      <div class="alert-box">
-        <strong>Atenção:</strong> Sempre confirme se o cartão está dentro da data de validade antes de realizar o procedimento!
+      <div class="card">
+        <h2>Fluxo Padrão de Atendimento</h2>
+        <ol>
+          <li><strong>Validação de Elegibilidade:</strong> Verificação do cartão e status do beneficiário.</li>
+          <li><strong>Solicitação de Autorização:</strong> Emissão de senha prévia para consultas, SADT e internações.</li>
+          <li><strong>Execução do Atendimento:</strong> Coleta da assinatura física/digital do paciente.</li>
+          <li><strong>Faturamento Web:</strong> Envio dos lotes XML TISS e acompanhamento de relatórios.</li>
+        </ol>
       </div>
-    </section>
+    </div>
 
-    <section id="guias">
-      <h2>3. Digitação de Guias TISS</h2>
-      <p>Campos obrigatórios para abertura de solicitações (SP/SADT e Internação):</p>
+    <!-- ABA 2: NOTREDAME INTERMÉDICA -->
+    <div id="notredame" class="tab-content">
+      <div class="card">
+        <h2>Portal NotreDame Intermédica (GNDI)</h2>
+        <p>Instruções para acesso e digitação de guias no portal GNDI/NotreDame.</p>
+        
+        <!-- Exemplo de Imagem do Portal -->
+        <div class="img-box">
+          <img src="notredame-tela1.png" alt="Tela do Portal GNDI" onerror="this.src='https://via.placeholder.com/800x350?text=Suba+a+imagem+notredame-tela1.png+no+GitHub'">
+          <div class="img-caption">Figura 1: Tela inicial de acesso e menu de elegibilidade GNDI.</div>
+        </div>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Bloco TISS</th>
-            <th>Campos Obrigatórios</th>
-            <th>Exemplo / Descrição</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Dados do Beneficiário</strong></td>
-            <td>Nº da Carteira, Nome Completo</td>
-            <td>Dados impressos no cartão do paciente.</td>
-          </tr>
-          <tr>
-            <td><strong>Dados do Solicitante</strong></td>
-            <td>Código Prestador, CRM e UF</td>
-            <td>Ex.: CRM/SP 139532 ou CRM/SP 126726.</td>
-          </tr>
-          <tr>
-            <td><strong>Procedimentos</strong></td>
-            <td>Tabela TUSS, Código e Quantidade</td>
-            <td>Ex.: Código <code>10102019</code> (Visita Hospitalar).</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
+        <h3>Passo a Passo de Elegibilidade:</h3>
+        <ol>
+          <li>Acesse a área logada do prestador.</li>
+          <li>Informe o número da carteirinha (19 dígitos, ex.: <code>9702818400000226000</code>).</li>
+          <li>Verifique a acomodação autorizada (Enfermaria/Apartamento) e carências.</li>
+        </ol>
+      </div>
 
-    <section id="faturamento">
-      <h2>4. Faturamento Eletrônico e Fechamento de Lote</h2>
-      <ol>
-        <li>Acesse o menu <strong>Faturamento Web / Lotes TISS</strong>.</li>
-        <li>Selecione o período das guias executadas.</li>
-        <li>Importe ou valide os arquivos em formato <code>.XML</code>.</li>
-        <li>Emita o <strong>Protocolo de Entrega de Faturamento</strong>.</li>
-      </ol>
-    </section>
+      <div class="card">
+        <h2>Digitação de Guias SP/SADT</h2>
+        <div class="alert-box">
+          <strong>Atenção:</strong> Sempre informe o CRM do médico solicitante (Ex.: CRM/SP 139532) e o código TUSS exato do procedimento.
+        </div>
+      </div>
+    </div>
 
-    <section id="dicas">
-      <h2>5. Boas Práticas e Prevenção de Glosas</h2>
-      <ul>
-        <li>Colha a assinatura física ou digital do beneficiário na guia impressa.</li>
-        <li>Certifique-se de usar a versão atualizada da tabela TUSS da operadora.</li>
-        <li>Fique atento aos prazos para digitação de urgência e emergência.</li>
-      </ul>
-    </section>
+    <!-- ABA 3: UNIMED -->
+    <div id="unimed" class="tab-content">
+      <div class="card">
+        <h2>Portal Unimed</h2>
+        <p>Procedimentos para validação e solicitação de autorizações na Unimed.</p>
+
+        <div class="img-box">
+          <img src="unimed-tela1.png" alt="Tela do Portal Unimed" onerror="this.src='https://via.placeholder.com/800x350?text=Suba+a+imagem+unimed-tela1.png+no+GitHub'">
+          <div class="img-caption">Figura 2: Portal de autorização de guias Unimed.</div>
+        </div>
+
+        <h3>Passo a Passo:</h3>
+        <ol>
+          <li>Consulte o cartão Unimed de 17 dígitos.</li>
+          <li>Gere a guia de solicitação de internação ou procedimento SADT.</li>
+          <li>Confira a data de validade da senha gerada.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- ABA 4: AMIL -->
+    <div id="amil" class="tab-content">
+      <div class="card">
+        <h2>Portal Amil Prestador</h2>
+        <p>Navegação e autorização de exames/consultas no sistema Amil.</p>
+        
+        <div class="img-box">
+          <img src="amil-tela1.png" alt="Tela do Portal Amil" onerror="this.src='https://via.placeholder.com/800x350?text=Suba+a+imagem+amil-tela1.png+no+GitHub'">
+          <div class="img-caption">Figura 3: Sistema de faturamento e elegibilidade Amil.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABA 5: BRADESCO SAÚDE -->
+    <div id="bradesco" class="tab-content">
+      <div class="card">
+        <h2>Portal Bradesco Saúde</h2>
+        <p>Guia de operação no sistema Bradesco Saúde TISS.</p>
+
+        <div class="img-box">
+          <img src="bradesco-tela1.png" alt="Tela Bradesco Saúde" onerror="this.src='https://via.placeholder.com/800x350?text=Suba+a+imagem+bradesco-tela1.png+no+GitHub'">
+          <div class="img-caption">Figura 4: Tela de digitação TISS Bradesco Saúde.</div>
+        </div>
+      </div>
+    </div>
   </main>
 
   <script>
-    // Função simples de busca interativa
-    function filterContent() {
-      const input = document.getElementById('searchInput').value.toLowerCase();
-      const sections = document.querySelectorAll('section');
+    // Lógica para alternar entre as abas
+    function openTab(evt, tabName) {
+      const tabContents = document.querySelectorAll('.tab-content');
+      tabContents.forEach(content => content.classList.remove('active'));
 
-      sections.forEach(section => {
-        const text = section.innerText.toLowerCase();
-        if (text.includes(input)) {
-          section.style.display = '';
-        } else {
-          section.style.display = 'none';
-        }
-      });
+      const tabBtns = document.querySelectorAll('.tab-btn');
+      tabBtns.forEach(btn => btn.classList.remove('active'));
+
+      document.getElementById(tabName).classList.add('active');
+      evt.currentTarget.classList.add('active');
     }
   </script>
 </body>
