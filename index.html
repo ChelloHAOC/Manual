@@ -73,9 +73,8 @@
       cursor: pointer;
       border-radius: 6px;
       transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      display: block;
+      width: 100%;
     }
 
     .tab-btn:hover {
@@ -84,8 +83,8 @@
     }
 
     .tab-btn.active {
-      color: #ffffff;
-      background-color: var(--primary);
+      color: #ffffff !important;
+      background-color: var(--primary) !important;
       box-shadow: 0 2px 4px rgba(0,86,179,0.25);
     }
 
@@ -94,11 +93,6 @@
       color: var(--primary-dark);
       border: 1px solid #bfdbfe;
       margin-bottom: 10px;
-    }
-
-    .tab-btn.highlight-btn.active {
-      background-color: var(--primary-dark);
-      color: #ffffff;
     }
 
     /* Área de Conteúdo */
@@ -161,16 +155,6 @@
       padding-bottom: 6px;
     }
 
-    ol, ul {
-      margin-left: 20px;
-      margin-bottom: 14px;
-      line-height: 1.6;
-    }
-
-    li {
-      margin-bottom: 6px;
-    }
-
     /* Caixa de Imagem */
     .img-box {
       margin: 18px 0;
@@ -227,7 +211,6 @@
       font-size: 0.95rem;
     }
 
-    /* Destaques */
     .alert-box {
       background-color: #fef3c7;
       border-left: 4px solid #f59e0b;
@@ -237,28 +220,10 @@
       font-size: 0.9rem;
     }
 
-    code {
-      background: #f1f5f9;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-family: monospace;
-      color: #0284c7;
-    }
-
-    /* Mobile */
     @media (max-width: 768px) {
-      body {
-        flex-direction: column;
-      }
-      aside {
-        width: 100%;
-        position: relative;
-        height: auto;
-      }
-      main {
-        margin-left: 0;
-        padding: 15px;
-      }
+      body { flex-direction: column; }
+      aside { width: 100%; position: relative; }
+      main { margin-left: 0; padding: 15px; }
     }
   </style>
 </head>
@@ -268,29 +233,29 @@
   <aside>
     <div class="sidebar-title">Menu de Convênios</div>
     <div class="nav-list">
-      <button class="tab-btn highlight-btn active" onclick="showTab(this, 'tab-telefones')">📞 Central Telefônica</button>
-      <button class="tab-btn" onclick="showTab(this, 'tab-unimed-seguros')">Unimed Seguros</button>
-      <button class="tab-btn" onclick="showTab(this, 'tab-alice')">Alice</button>
-      <button class="tab-btn" onclick="showTab(this, 'tab-proasa')">Proasa</button>
-      <button class="tab-btn" onclick="showTab(this, 'tab-amil')">Amil</button>
-      <button class="tab-btn" onclick="showTab(this, 'tab-porto-seguro')">Porto Seguro</button>
-      <button class="tab-btn" onclick="showTab(this, 'tab-bradesco')">Bradesco Saúde</button>
-      <button class="tab-btn" onclick="showTab(this, 'tab-care-plus')">Care Plus</button>
-      <button class="tab-btn" onclick="showTab(this, 'tab-orizon')">Orizon / Itauseg</button>
-      <button class="tab-btn" onclick="showTab(this, 'tab-notredame')">NotreDame / Savi</button>
-      <button class="tab-btn" onclick="showTab(this, 'tab-medsenior')">MedSênior</button>
-      <button class="tab-btn" onclick="showTab(this, 'tab-abas')">Abas</button>
-      <button class="tab-btn" onclick="showTab(this, 'tab-unafisco')">Unafisco Saúde</button>
-      <button class="tab-btn" onclick="showTab(this, 'tab-vivest')">Vivest</button>
-      <button class="tab-btn" onclick="showTab(this, 'tab-plan-assiste')">Plan Assiste MPF</button>
-      <button class="tab-btn" onclick="showTab(this, 'tab-rnw')">RNW</button>
-      <button class="tab-btn" onclick="showTab(this, 'tab-petrobras')">Petrobras</button>
-      <button class="tab-btn" onclick="showTab(this, 'tab-medservice')">MedService</button>
-      <button class="tab-btn" onclick="showTab(this, 'tab-gama')">Gama Saúde</button>
-      <button class="tab-btn" onclick="showTab(this, 'tab-omint')">Omint</button>
-      <button class="tab-btn" onclick="showTab(this, 'tab-cnu')">CNU (Unimed)</button>
-      <button class="tab-btn" onclick="showTab(this, 'tab-afresp')">Afresp</button>
-      <button class="tab-btn" onclick="showTab(this, 'tab-sulamerica')">SulAmérica</button>
+      <button class="tab-btn highlight-btn active" data-target="tab-telefones">📞 Central Telefônica</button>
+      <button class="tab-btn" data-target="tab-unimed-seguros">Unimed Seguros</button>
+      <button class="tab-btn" data-target="tab-alice">Alice</button>
+      <button class="tab-btn" data-target="tab-proasa">Proasa</button>
+      <button class="tab-btn" data-target="tab-amil">Amil</button>
+      <button class="tab-btn" data-target="tab-porto-seguro">Porto Seguro</button>
+      <button class="tab-btn" data-target="tab-bradesco">Bradesco Saúde</button>
+      <button class="tab-btn" data-target="tab-care-plus">Care Plus</button>
+      <button class="tab-btn" data-target="tab-orizon">Orizon / Itauseg</button>
+      <button class="tab-btn" data-target="tab-notredame">NotreDame / Savi</button>
+      <button class="tab-btn" data-target="tab-medsenior">MedSênior</button>
+      <button class="tab-btn" data-target="tab-abas">Abas</button>
+      <button class="tab-btn" data-target="tab-unafisco">Unafisco Saúde</button>
+      <button class="tab-btn" data-target="tab-vivest">Vivest</button>
+      <button class="tab-btn" data-target="tab-plan-assiste">Plan Assiste MPF</button>
+      <button class="tab-btn" data-target="tab-rnw">RNW</button>
+      <button class="tab-btn" data-target="tab-petrobras">Petrobras</button>
+      <button class="tab-btn" data-target="tab-medservice">MedService</button>
+      <button class="tab-btn" data-target="tab-gama">Gama Saúde</button>
+      <button class="tab-btn" data-target="tab-omint">Omint</button>
+      <button class="tab-btn" data-target="tab-cnu">CNU (Unimed)</button>
+      <button class="tab-btn" data-target="tab-afresp">Afresp</button>
+      <button class="tab-btn" data-target="tab-sulamerica">SulAmérica</button>
     </div>
   </aside>
 
@@ -328,4 +293,72 @@
             <tr><td><strong>NotreDame Intermédica / Savi</strong></td><td>NotreDame: (11) 3155-2355 | Savi: (11) 4002-3336</td></tr>
             <tr><td><strong>MedSênior</strong></td><td>(27) 3025-5536 / (27) 99792-0267 / (11) 4007-2001</td></tr>
             <tr><td><strong>Abas</strong></td><td>0800 591 5268 / (19) 99913-71355</td></tr>
-            <tr><td><strong>Unafisco Saúde</strong></td><td>080
+            <tr><td><strong>Unafisco Saúde</strong></td><td>0800 028 2777</td></tr>
+            <tr><td><strong>Vivest</strong></td><td>4004-0173</td></tr>
+            <tr><td><strong>Plan Assiste MPF</strong></td><td>(11) 2192-8925 / (11) 98413-2033 / (11) 3269-5309</td></tr>
+            <tr><td><strong>RNW</strong></td><td>(21) 2437-7374</td></tr>
+            <tr><td><strong>Petrobras</strong></td><td>0800 728 3372</td></tr>
+            <tr><td><strong>MedService</strong></td><td>4004-2710 | Recuperar Senha: 4004-2773</td></tr>
+            <tr><td><strong>Gama Saúde</strong></td><td>0800 722 0178 / 4004-0178</td></tr>
+            <tr><td><strong>Omint</strong></td><td>4004-4011 / (11) 2132-4141</td></tr>
+            <tr><td><strong>Central Nacional Unimed (CNU)</strong></td><td>(11) 2505-1111 / (11) 3478-9600</td></tr>
+            <tr><td><strong>Afresp</strong></td><td>(11) 3886-8800</td></tr>
+            <tr><td><strong>SulAmérica</strong></td><td>4004-5901</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- UNIMED SEGUROS -->
+    <div id="tab-unimed-seguros" class="tab-content">
+      <div class="card">
+        <h2>Unimed Seguros</h2>
+        <p>Escreva aqui o passo a passo da Unimed Seguros.</p>
+        <div class="img-box">
+          <img src="unimed-seguros-tela.png" alt="Unimed Seguros" onerror="this.src='https://via.placeholder.com/800x300?text=Suba+a+imagem+unimed-seguros-tela.png+no+GitHub'">
+          <div class="img-caption">Tela do portal Unimed Seguros</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ALICE -->
+    <div id="tab-alice" class="tab-content">
+      <div class="card">
+        <h2>Alice</h2>
+        <p>Escreva aqui o passo a passo da Alice.</p>
+        <div class="img-box">
+          <img src="alice-tela.png" alt="Alice" onerror="this.src='https://via.placeholder.com/800x300?text=Suba+a+imagem+alice-tela.png+no+GitHub'">
+          <div class="img-caption">Tela do portal Alice</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROASA -->
+    <div id="tab-proasa" class="tab-content">
+      <div class="card">
+        <h2>Proasa</h2>
+        <p>Escreva aqui o passo a passo do Proasa.</p>
+        <div class="img-box">
+          <img src="proasa-tela.png" alt="Proasa" onerror="this.src='https://via.placeholder.com/800x300?text=Suba+a+imagem+proasa-tela.png+no+GitHub'">
+          <div class="img-caption">Tela do portal Proasa</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AMIL -->
+    <div id="tab-amil" class="tab-content">
+      <div class="card">
+        <h2>Amil</h2>
+        <p>Escreva aqui o passo a passo da Amil.</p>
+        <div class="img-box">
+          <img src="amil-tela.png" alt="Amil" onerror="this.src='https://via.placeholder.com/800x300?text=Suba+a+imagem+amil-tela.png+no+GitHub'">
+          <div class="img-caption">Tela do portal Amil</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PORTO SEGURO -->
+    <div id="tab-porto-seguro" class="tab-content">
+      <div class="card">
+        <h2>Porto Seguro</h2>
+        <p>Escreva aqui o passo a passo da Porto Seguro.</p>
