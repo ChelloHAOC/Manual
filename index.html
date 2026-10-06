@@ -20,7 +20,7 @@
 <header class="topbar"><div class="brand"><div class="brand-mark">C</div><div>Central de Convênios<small>Manual operacional do prestador</small></div></div><div style="color:var(--muted);font-size:12px">Protótipo v1</div></header>
 <main class="main">
 <section class="home" id="home">
-<div class="hero"><div class="hero-copy"><div class="eyebrow">Consulta rápida</div><h1>Encontre o convênio. Encontre o procedimento.</h1><p>Uma central simples para consultar tutoriais, contatos e orientações de cada convênio usado no hospital.</p><label class="search"><span>⌕</span><input id="search" placeholder="Pesquisar convênio..." autocomplete="off"></label></div><div class="hero-card"><div><div class="number">22</div><div style="font-size:17px;font-weight:800">convênios cadastrados</div><p>O espaço dos logos já está preparado para receber a identidade visual de cada operadora.</p></div><div style="font-size:13px;opacity:.8">Clique em qualquer convênio abaixo para visualizar o modelo.</div></div></div>
+<div class="hero"><div class="hero-copy"><div class="eyebrow">Consulta rápida</div><h1>Encontre o convênio. Encontre o procedimento.</h1><p>Uma central simples para consultar tutoriais, contatos e orientações de cada convênio usado no hospital.</p><label class="search"><span>⌕</span><input id="search" placeholder="Pesquisar convênio..." autocomplete="off"></label></div><div class="hero-card"><div><div class="number">22</div><div style="font-size:17px;font-weight:800">convênios cadastrados</div><p></p></div><div style="font-size:13px;opacity:.8">Clique em qualquer convênio abaixo para visualizar o modelo.</div></div></div>
 <div class="section-head"><div><h2>Todos os convênios</h2></div><p id="count">22 disponíveis</p></div><div class="grid" id="grid"></div>
 </section>
 <section class="detail" id="detail"><button class="back" id="back">← Voltar para convênios</button><div class="detail-head"><div class="detail-logo" id="dLogo">BR</div><div><h1 id="dName">Bradesco</h1><p id="dSub">Manual operacional</p></div><div class="contact" id="dPhone">☎ (11) 4004-4580</div></div><div class="tutorial-grid"><article class="tutorial"><div class="icon">📖</div><h3>Tutorial</h3><p id="tutorialText">Selecione um convênio para visualizar o tutorial.</p></article><article class="tutorial"><div class="icon">☎</div><h3>Telefones</h3><p id="dPhone2">(11) 4004-4580</p></article></div></section>
@@ -28,26 +28,26 @@
 <script>
 const convenios=[
 ['Unimed Seguros - Top Saúde','(11) 3003-5303','https://tse1.mm.bing.net/th/id/OIP.s__Y019-UbjUt7fIh9re6gHaDE?r=0&rs=1&pid=ImgDetMain&o=7&rm=3'],
-  ['Alice','(11) 4020-5270',''],
-  ['Proasa','(61) 3701-1868 / (61) 3701-1800',''],
-  ['Amil','(11) 3004-1028 NAC / (11) 3004-1050',''],
-  ['Porto Seguro','(11) 3366-3633',''],
+  ['Alice','(11) 4020-5270','https://marcaspelomundo.com.br/wp-content/uploads/2024/07/logo_magenta-1024x576.jpg'],
+  ['Proasa','(61) 3701-1868 / (61) 3701-1800','https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/6a/ec/76/6aec76fd-6995-4370-774d-4d49b0e35afd/AppIcon-0-0-1x_U007emarketing-0-6-0-0-85-220.png/1200x630wa.png'],
+  ['Amil','(11) 3004-1028 NAC / (11) 3004-1050','https://www.saudeseguros.com/wp-content/uploads/2023/03/plano-e-saude-amil-como-escolher-o-melhor-plano-para-voce.jpg'],
+  ['Porto Seguro','(11) 3366-3633','https://mobilidade.estadao.com.br/wp-content/uploads/2024/11/porto-seguro.png.webp'],
   ['Bradesco','(11) 4004-4580','https://tse3.mm.bing.net/th/id/OIP.dogka6apPeCgEIL0ZvmtagHaH2?r=0&rs=1&pid=ImgDetMain&o=7&rm=3'],
-  ['Care Plus','0800 407 9000',''],
-  ['Orizon / Itaúseg','(11) 4932-5014 / (11) 3003-7333 / 0800 701 9817',''],
-  ['NotreDame','(11) 3155-2355 / Savi (11) 4002-3336',''],
-  ['MedSenior','(27) 3025-5536 / (27) 99792-0267 / (11) 4007-2001',''],
-  ['Abas','0800 591 5268 / (19) 99913-7135',''],
-  ['Unafisco Saúde','0800 028 2777',''],
-  ['Vivest','4004-0173',''],
-  ['Plan Assiste MPF','(21) 2192-8925 / (21) 98413-2033 / (21) 3269-5309',''],
-  ['RNW','(21) 2437-7374',''],
-  ['Petrobras','0800 728 3372',''],
-  ['MedService','4004-2710 / Recuperar senha: 4004-2773',''],
-  ['Gama Saúde','0800 722 0178 / 4004-0178',''],['Omint','4004-4011 / (21) 2132-4141',''],
-  ['Central Nacional Unimed - CNU','2505-1111 / (11) 3478-9600',''],
-  ['Afresp','(11) 3886-8800',''],
-  ['Sul América','4004-5901','']];
+  ['Care Plus','0800 407 9000','https://clinicaeredita.com.br/wp-content/uploads/2024/04/logo_careplus_padrao-1024x1024-1-e1674678677474.webp'],
+  ['Orizon / Itaúseg','(11) 4932-5014 / (11) 3003-7333 / 0800 701 9817','https://tse4.mm.bing.net/th/id/OIP.Jxc0WSWoApC4CCrEt0UAtwAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3'],
+  ['NotreDame','(11) 3155-2355 / Savi (11) 4002-3336','https://braziljournal.com/wp-content/uploads/2022/06/46982d20-93ef-f325-4d4e-e54118ad4cdf.jpg'],
+  ['MedSenior','(27) 3025-5536 / (27) 99792-0267 / (11) 4007-2001','https://mkplanosdesaude.com.br/wp-content/uploads/2024/07/Logo-MedSenior.png'],
+  ['Abas','0800 591 5268 / (19) 99913-7135','https://static.wixstatic.com/media/cc841a_b132a2fae32d4645989aeae1da72cbdd~mv2.png/v1/fill/w_292,h_80,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Logo_Abas_Rodap%C3%83%C2%A9.png'],
+  ['Unafisco Saúde','0800 028 2777','https://tse2.mm.bing.net/th/id/OIP.kZQuNlqSTyRvyRsjQCHI-QAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3'],
+  ['Vivest','4004-0173','https://tse2.mm.bing.net/th/id/OIP.VJqLpQNzCutDusYoZpzKaAHaDY?r=0&rs=1&pid=ImgDetMain&o=7&rm=3'],
+  ['Plan Assiste MPF','(21) 2192-8925 / (21) 98413-2033 / (21) 3269-5309','https://tse3.mm.bing.net/th/id/OIP.PeSJFsjxgXQNHgbm8yHG1QHaCO?r=0&rs=1&pid=ImgDetMain&o=7&rm=3'],
+  ['RNW','(21) 2437-7374','https://media.licdn.com/dms/image/v2/C4E1BAQFl8AlR8Mp3mg/company-background_10000/company-background_10000/0/1585134989053/rnw___gest_o_internacional_em_sa_de_cover?e=2147483647&v=beta&t=dTqRqptorESerJYbvWQg-qQSyZGoN6TAHLnYxMNUdAk'],
+  ['Petrobras','0800 728 3372','https://tse3.mm.bing.net/th/id/OIP.n4Hc82AhGa7na6paez0_NQHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3'],
+  ['MedService','4004-2710 / Recuperar senha: 4004-2773','https://is3-ssl.mzstatic.com/image/thumb/Purple126/v4/73/e1/68/73e168c1-c935-92fd-0b47-247e6c135682/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/1200x630wa.png'],
+  ['Gama Saúde','0800 722 0178 / 4004-0178',''],['Omint','4004-4011 / (21) 2132-4141','https://th.bing.com/th/id/R.642fd96048befd34079f7999e6c14c94?rik=wbtkr95KCcrxig&riu=http%3a%2f%2fsantacasapinda.com%2fimg%2fConvenios%2fgama.jpg&ehk=PlCf1eb4ZRS%2fuaNFgpJDZ0%2fITKVbO4rYgaJXuUyNuO4%3d&risl=&pid=ImgRaw&r=0'],
+  ['Central Nacional Unimed - CNU','2505-1111 / (11) 3478-9600','https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/d4/cf/b9/d4cfb955-f526-bc61-815d-19868d6fbdb0/AppIcon-1x_U007emarketing-0-11-0-0-85-220-0.png/1200x630wa.png'],
+  ['Afresp','(11) 3886-8800','https://maternidadesantamaria.com.br/wp-content/uploads/2023/09/afresp_amafresp.png'],
+  ['Sul América','4004-5901','https://saude.sulamericaseguros.com.br/sai/image/logo_sulamerica.gif']];
 
 const grid=document.getElementById('grid'), search=document.getElementById('search'), count=document.getElementById('count');
 
