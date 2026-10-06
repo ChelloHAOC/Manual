@@ -11,6 +11,7 @@
       --bg-light: #f4f6f9;
       --text-color: #2c3e50;
       --border-color: #e2e8f0;
+      --sidebar-width: 280px;
     }
 
     * {
@@ -24,86 +25,113 @@
       background-color: var(--bg-light);
       color: var(--text-color);
       min-height: 100vh;
+      display: flex;
     }
 
-    /* Cabeçalho */
-    header {
-      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
-      color: white;
-      padding: 25px 20px 15px 20px;
-      text-align: center;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    }
-
-    header h1 {
-      font-size: 1.8rem;
-      margin-bottom: 6px;
-    }
-
-    header p {
-      opacity: 0.9;
-      font-size: 0.95rem;
-    }
-
-    /* Navegação por Abas */
-    .tabs-wrapper {
-      background: white;
-      border-bottom: 2px solid var(--border-color);
-      position: sticky;
+    /* Sidebar Lateral Fixa */
+    aside {
+      width: var(--sidebar-width);
+      background: #ffffff;
+      border-right: 1px solid var(--border-color);
+      position: fixed;
       top: 0;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      flex-direction: column;
+      padding: 20px 10px;
+      overflow-y: auto;
       z-index: 100;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-      overflow-x: auto;
-      white-space: nowrap;
+      box-shadow: 2px 0 6px rgba(0,0,0,0.03);
     }
 
-    .tabs-container {
-      display: inline-flex;
-      padding: 8px 10px 0 10px;
-      gap: 4px;
+    aside .sidebar-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      padding: 10px 12px;
+      margin-bottom: 10px;
+      border-bottom: 2px solid var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-list {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
     }
 
     .tab-btn {
       background: none;
       border: none;
-      padding: 10px 16px;
-      font-size: 0.9rem;
+      text-align: left;
+      padding: 11px 14px;
+      font-size: 0.92rem;
       font-weight: 600;
-      color: #64748b;
+      color: #475569;
       cursor: pointer;
-      border-bottom: 3px solid transparent;
+      border-radius: 6px;
       transition: all 0.2s ease;
-      border-radius: 4px 4px 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
     .tab-btn:hover {
       color: var(--primary);
-      background-color: #f8fafc;
+      background-color: #f1f5f9;
     }
 
     .tab-btn.active {
-      color: var(--primary);
-      border-bottom-color: var(--primary);
-      background-color: #ffffff;
+      color: #ffffff;
+      background-color: var(--primary);
+      box-shadow: 0 2px 4px rgba(0,86,179,0.25);
     }
 
-    .tab-btn.highlight {
+    .tab-btn.highlight-btn {
       background-color: #eff6ff;
       color: var(--primary-dark);
       border: 1px solid #bfdbfe;
-      border-bottom: 3px solid var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .tab-btn.highlight-btn.active {
+      background-color: var(--primary-dark);
+      color: #ffffff;
     }
 
     /* Área de Conteúdo */
     main {
-      max-width: 1100px;
-      margin: 25px auto;
-      padding: 0 20px;
+      margin-left: var(--sidebar-width);
+      flex: 1;
+      padding: 30px;
+      max-width: 1000px;
+    }
+
+    header {
+      background: white;
+      padding: 24px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+      border: 1px solid var(--border-color);
+    }
+
+    header h1 {
+      color: var(--primary-dark);
+      font-size: 1.8rem;
+      margin-bottom: 6px;
+    }
+
+    header p {
+      color: #64748b;
+      font-size: 0.95rem;
     }
 
     .tab-content {
       display: none;
-      animation: fadeIn 0.3s ease;
+      animation: fadeIn 0.25s ease;
     }
 
     .tab-content.active {
@@ -111,7 +139,7 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
+      from { opacity: 0; transform: translateY(4px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
@@ -121,7 +149,7 @@
       padding: 24px;
       border-radius: 8px;
       margin-bottom: 20px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
       border: 1px solid var(--border-color);
     }
 
@@ -148,7 +176,7 @@
       margin: 18px 0;
       text-align: center;
       background: #f8fafc;
-      padding: 10px;
+      padding: 12px;
       border-radius: 6px;
       border: 1px dashed #cbd5e1;
     }
@@ -157,7 +185,7 @@
       max-width: 100%;
       height: auto;
       border-radius: 4px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     }
 
     .img-caption {
@@ -216,50 +244,68 @@
       font-family: monospace;
       color: #0284c7;
     }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+      aside {
+        width: 100%;
+        position: relative;
+        height: auto;
+      }
+      main {
+        margin-left: 0;
+        padding: 15px;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Manual Operacional do Prestador</h1>
-    <p>Guias de utilização dos portais de convênios, contatos e faturamento TISS</p>
-  </header>
-
-  <!-- Barra de Abas Rolável -->
-  <div class="tabs-wrapper">
-    <div class="tabs-container">
-      <button class="tab-btn highlight active" onclick="openTab(event, 'telefones')">📞 Telefones e Contatos</button>
-      <button class="tab-btn" onclick="openTab(event, 'unimed-seguros')">Unimed Seguros</button>
-      <button class="tab-btn" onclick="openTab(event, 'alice')">Alice</button>
-      <button class="tab-btn" onclick="openTab(event, 'proasa')">Proasa</button>
-      <button class="tab-btn" onclick="openTab(event, 'amil')">Amil</button>
-      <button class="tab-btn" onclick="openTab(event, 'porto-seguro')">Porto Seguro</button>
-      <button class="tab-btn" onclick="openTab(event, 'bradesco')">Bradesco</button>
-      <button class="tab-btn" onclick="openTab(event, 'care-plus')">Care Plus</button>
-      <button class="tab-btn" onclick="openTab(event, 'orizon')">Orizon / Itauseg</button>
-      <button class="tab-btn" onclick="openTab(event, 'notredame')">NotreDame / Savi</button>
-      <button class="tab-btn" onclick="openTab(event, 'medsenior')">MedSênior</button>
-      <button class="tab-btn" onclick="openTab(event, 'abas')">Abas</button>
-      <button class="tab-btn" onclick="openTab(event, 'unafisco')">Unafisco Saúde</button>
-      <button class="tab-btn" onclick="openTab(event, 'vivest')">Vivest</button>
-      <button class="tab-btn" onclick="openTab(event, 'plan-assiste')">Plan Assiste MPF</button>
-      <button class="tab-btn" onclick="openTab(event, 'rnw')">RNW</button>
-      <button class="tab-btn" onclick="openTab(event, 'petrobras')">Petrobras</button>
-      <button class="tab-btn" onclick="openTab(event, 'medservice')">MedService</button>
-      <button class="tab-btn" onclick="openTab(event, 'gama')">Gama Saúde</button>
-      <button class="tab-btn" onclick="openTab(event, 'omint')">Omint</button>
-      <button class="tab-btn" onclick="openTab(event, 'cnu')">CNU (Unimed)</button>
-      <button class="tab-btn" onclick="openTab(event, 'afresp')">Afresp</button>
-      <button class="tab-btn" onclick="openTab(event, 'sulamerica')">SulAmérica</button>
+  <!-- Menu Lateral -->
+  <aside>
+    <div class="sidebar-title">Menu de Convênios</div>
+    <div class="nav-list">
+      <button class="tab-btn highlight-btn active" onclick="showTab(this, 'tab-telefones')">📞 Central Telefônica</button>
+      <button class="tab-btn" onclick="showTab(this, 'tab-unimed-seguros')">Unimed Seguros</button>
+      <button class="tab-btn" onclick="showTab(this, 'tab-alice')">Alice</button>
+      <button class="tab-btn" onclick="showTab(this, 'tab-proasa')">Proasa</button>
+      <button class="tab-btn" onclick="showTab(this, 'tab-amil')">Amil</button>
+      <button class="tab-btn" onclick="showTab(this, 'tab-porto-seguro')">Porto Seguro</button>
+      <button class="tab-btn" onclick="showTab(this, 'tab-bradesco')">Bradesco Saúde</button>
+      <button class="tab-btn" onclick="showTab(this, 'tab-care-plus')">Care Plus</button>
+      <button class="tab-btn" onclick="showTab(this, 'tab-orizon')">Orizon / Itauseg</button>
+      <button class="tab-btn" onclick="showTab(this, 'tab-notredame')">NotreDame / Savi</button>
+      <button class="tab-btn" onclick="showTab(this, 'tab-medsenior')">MedSênior</button>
+      <button class="tab-btn" onclick="showTab(this, 'tab-abas')">Abas</button>
+      <button class="tab-btn" onclick="showTab(this, 'tab-unafisco')">Unafisco Saúde</button>
+      <button class="tab-btn" onclick="showTab(this, 'tab-vivest')">Vivest</button>
+      <button class="tab-btn" onclick="showTab(this, 'tab-plan-assiste')">Plan Assiste MPF</button>
+      <button class="tab-btn" onclick="showTab(this, 'tab-rnw')">RNW</button>
+      <button class="tab-btn" onclick="showTab(this, 'tab-petrobras')">Petrobras</button>
+      <button class="tab-btn" onclick="showTab(this, 'tab-medservice')">MedService</button>
+      <button class="tab-btn" onclick="showTab(this, 'tab-gama')">Gama Saúde</button>
+      <button class="tab-btn" onclick="showTab(this, 'tab-omint')">Omint</button>
+      <button class="tab-btn" onclick="showTab(this, 'tab-cnu')">CNU (Unimed)</button>
+      <button class="tab-btn" onclick="showTab(this, 'tab-afresp')">Afresp</button>
+      <button class="tab-btn" onclick="showTab(this, 'tab-sulamerica')">SulAmérica</button>
     </div>
-  </div>
+  </aside>
 
+  <!-- Conteúdo Principal -->
   <main>
-    <!-- ABA TELEFONES E CONTATOS -->
-    <div id="telefones" class="tab-content active">
+    <header>
+      <h1>Manual Operacional do Prestador</h1>
+      <p>Instruções passo a passo, capturas de tela e telefones de atendimento por operadora</p>
+    </header>
+
+    <!-- TAB 1: TELEFONES -->
+    <div id="tab-telefones" class="tab-content active">
       <div class="card">
-        <h2>Central Telefônica de Atendimento aos Convênios</h2>
-        <p>Utilize o campo abaixo para pesquisar rapidamente o número de telefone de qualquer operadora:</p>
+        <h2>Central Telefônica dos Convênios</h2>
+        <p>Pesquise o número de qualquer operadora abaixo:</p>
         <br>
         <input type="text" id="phoneSearch" class="search-input" placeholder="Digite o nome do convênio..." onkeyup="filterPhones()">
 
@@ -282,63 +328,4 @@
             <tr><td><strong>NotreDame Intermédica / Savi</strong></td><td>NotreDame: (11) 3155-2355 | Savi: (11) 4002-3336</td></tr>
             <tr><td><strong>MedSênior</strong></td><td>(27) 3025-5536 / (27) 99792-0267 / (11) 4007-2001</td></tr>
             <tr><td><strong>Abas</strong></td><td>0800 591 5268 / (19) 99913-71355</td></tr>
-            <tr><td><strong>Unafisco Saúde</strong></td><td>0800 028 2777</td></tr>
-            <tr><td><strong>Vivest</strong></td><td>4004-0173</td></tr>
-            <tr><td><strong>Plan Assiste MPF</strong></td><td>(11) 2192-8925 / (11) 98413-2033 / (11) 3269-5309</td></tr>
-            <tr><td><strong>RNW</strong></td><td>(21) 2437-7374</td></tr>
-            <tr><td><strong>Petrobras</strong></td><td>0800 728 3372</td></tr>
-            <tr><td><strong>MedService</strong></td><td>4004-2710 | Recuperar Senha: 4004-2773</td></tr>
-            <tr><td><strong>Gama Saúde</strong></td><td>0800 722 0178 / 4004-0178</td></tr>
-            <tr><td><strong>Omint</strong></td><td>4004-4011 / (11) 2132-4141</td></tr>
-            <tr><td><strong>Central Nacional Unimed (CNU)</strong></td><td>(11) 2505-1111 / (11) 3478-9600</td></tr>
-            <tr><td><strong>Afresp</strong></td><td>(11) 3886-8800</td></tr>
-            <tr><td><strong>SulAmérica</strong></td><td>4004-5901</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- MODELO DE ABA PARA CADA CONVÊNIO (EDITÁVEL) -->
-
-    <!-- UNIMED SEGUROS -->
-    <div id="unimed-seguros" class="tab-content">
-      <div class="card">
-        <h2>Unimed Seguros</h2>
-        <p>Instruções para autorização de guias e elegibilidade no portal Unimed Seguros.</p>
-        <div class="img-box">
-          <img src="unimed-seguros-tela.png" alt="Portal Unimed Seguros" onerror="this.src='https://via.placeholder.com/800x300?text=Suba+a+imagem+unimed-seguros-tela.png+no+GitHub'">
-          <div class="img-caption">Tela inicial do portal de autorizações Unimed Seguros.</div>
-        </div>
-        <h3>Passos para Autorização:</h3>
-        <ol>
-          <li>Acesse a aba de elegibilidade e insira o número da carteirinha.</li>
-          <li>Verifique a acomodação e cobertura do plano Top Saúde.</li>
-        </ol>
-      </div>
-    </div>
-
-    <!-- ALICE -->
-    <div id="alice" class="tab-content">
-      <div class="card">
-        <h2>Alice</h2>
-        <p>Procedimentos de autorização para o ecossistema Alice.</p>
-        <div class="img-box">
-          <img src="alice-tela.png" alt="Portal Alice" onerror="this.src='https://via.placeholder.com/800x300?text=Suba+a+imagem+alice-tela.png+no+GitHub'">
-          <div class="img-caption">Painel do prestador Alice.</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- PROASA -->
-    <div id="proasa" class="tab-content">
-      <div class="card">
-        <h2>Proasa</h2>
-        <p>Instruções do portal Proasa.</p>
-        <div class="img-box">
-          <img src="proasa-tela.png" alt="Portal Proasa" onerror="this.src='https://via.placeholder.com/800x300?text=Suba+a+imagem+proasa-tela.png+no+GitHub'">
-          <div class="img-caption">Interface de envio de guias Proasa.</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- AMIL -->
+            <tr><td><strong>Unafisco Saúde</strong></td><td>080
