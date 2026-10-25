@@ -1,581 +1,405 @@
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Central de Convênios</title>
 <style>
 :root {
-  color-scheme: light;
-  --bg: #eef3f9;
-  --surface: #fff;
-  --text: #14243a;
-  --muted: #697b92;
-  --line: #dfe7f1;
-  --primary: #1558b0;
-  --primary2: #eaf2ff;
-  --shadow: 0 18px 45px rgba(15,45,85,.09);
+  --azul: #1558b0;
+  --fundo: #eef3f9;
+  --texto: #14243a;
+  --cinza: #697b92;
+  --borda: #dfe7f1;
 }
 * { box-sizing: border-box; }
-html, body {
+body {
   margin: 0;
-  min-height: 100%;
-  font-family: Inter, Arial, sans-serif;
-  background: var(--bg);
-  color: var(--text);
+  font-family: Arial, sans-serif;
+  background: var(--fundo);
+  color: var(--texto);
 }
-.app { min-height: 100vh; }
-.topbar {
-  min-height: 78px;
-  background: #fff;
-  border-bottom: 1px solid var(--line);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 5vw;
-  position: sticky;
-  top: 0;
-  z-index: 5;
-}
-.brand {
+header {
+  background: white;
+  padding: 20px 5%;
   display: flex;
   align-items: center;
   gap: 12px;
-  font-weight: 850;
+  border-bottom: 1px solid var(--borda);
 }
-.brand-mark {
-  width: 42px;
-  height: 42px;
-  border-radius: 14px;
-  background: linear-gradient(145deg,#1767db,#0c397d);
+.marca {
+  background: var(--azul);
   color: white;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
   display: grid;
   place-items: center;
-  font-weight: 900;
-  font-size: 20px;
-}
-.brand small {
-  display: block;
-  color: var(--muted);
-  font-size: 11px;
-  margin-top: 3px;
-}
-.main {
-  width: min(1180px,90vw);
-  margin: 0 auto;
-  padding: 42px 0 80px;
-}
-.hero {
-  display: grid;
-  grid-template-columns: 1.15fr .85fr;
-  gap: 24px;
-}
-.hero-copy { padding: 30px 0; }
-.eyebrow {
-  display: inline-block;
-  color: var(--primary);
-  font-weight: 850;
-  font-size: 11px;
-  letter-spacing: .12em;
-  background: #e2edff;
-  padding: 9px 12px;
-  border-radius: 8px;
-}
-.hero h1 {
-  font-size: clamp(40px,5vw,64px);
-  line-height: 1.02;
-  letter-spacing: -.06em;
-  margin: 20px 0;
-}
-.hero p {
-  color: var(--muted);
-  font-size: 16px;
-  line-height: 1.7;
-}
-.search {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: white;
-  border: 1px solid #d5e0ef;
-  border-radius: 12px;
-  padding: 6px;
-}
-.search span {
   font-size: 23px;
-  padding-left: 12px;
-  color: var(--primary);
+  font-weight: bold;
 }
-.search input {
-  flex: 1;
-  min-width: 0;
-  border: 0;
-  outline: 0;
-  padding: 14px 8px;
-  font-size: 15px;
-}
-.hero-card {
+header h2 { margin: 0; font-size: 18px; }
+header small { color: var(--cinza); }
+main { max-width: 1150px; width: 90%; margin: 35px auto; }
+.hero {
   background: #123b70;
   color: white;
-  border-radius: 16px;
-  padding: 32px;
+  padding: 35px;
+  border-radius: 18px;
+  margin-bottom: 28px;
+}
+.hero h1 { font-size: clamp(30px, 5vw, 48px); margin: 0 0 12px; }
+.hero p { line-height: 1.6; color: #d7e7fb; }
+.busca {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  font-size: 16px;
+  margin-top: 10px;
+}
+.titulo {
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
-  min-height: 300px;
-  box-shadow: var(--shadow);
-}
-.hero-card .number {
-  font-size: 82px;
-  font-weight: 900;
-  line-height: 1;
-}
-.hero-card p { color: #d7e7fb; }
-.section-head {
-  display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin: 48px 0 18px;
-}
-.section-head h2 { margin: 0; }
-.section-head p {
-  color: var(--muted);
-  font-size: 13px;
-  background: white;
-  padding: 8px 12px;
-  border-radius: 8px;
+  gap: 10px;
+  margin: 28px 0 16px;
 }
 .grid {
   display: grid;
-  grid-template-columns: repeat(3,minmax(0,1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
 }
-.card {
+.cartao {
   background: white;
-  border: 1px solid var(--line);
+  border: 1px solid var(--borda);
   border-radius: 14px;
-  padding: 20px;
-  min-height: 150px;
+  padding: 18px;
   cursor: pointer;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  min-height: 120px;
   transition: .2s;
-  display: grid;
-  grid-template-columns: 58px 1fr;
-  column-gap: 15px;
-  align-content: start;
-  overflow-wrap: anywhere;
 }
-.card:hover {
+.cartao:hover {
+  border-color: #82aef0;
   transform: translateY(-3px);
-  border-color: #9bbdec;
-  box-shadow: var(--shadow);
+  box-shadow: 0 8px 24px #14243a12;
 }
-.logo-slot {
+.logo {
   width: 58px;
   height: 58px;
-  border-radius: 12px;
-  background: #eaf2ff;
-  display: grid;
-  place-items: center;
-  font-weight: 900;
-  color: var(--primary);
-  grid-row: 1 / span 2;
-}
-.card h3 { font-size: 15px; margin: 3px 0 8px; }
-.card p {
-  font-size: 12px;
-  color: var(--muted);
-  margin: 0;
-  line-height: 1.5;
-}
-.empty {
-  grid-column: 1/-1;
-  padding: 32px;
-  text-align: center;
-  color: var(--muted);
-  background: white;
-  border: 1px dashed var(--line);
-  border-radius: 18px;
-}
-.detail { display: none; }
-.detail.active { display: block; }
-.home.hidden { display: none; }
-.back {
-  border: 0;
-  background: #eaf2ff;
-  color: var(--primary);
-  font-weight: 800;
-  padding: 11px 15px;
-  border-radius: 10px;
-  cursor: pointer;
-}
-.detail-head {
-  margin: 22px 0 24px;
-  background: white;
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  padding: 27px;
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  flex-wrap: wrap;
-  box-shadow: var(--shadow);
-}
-.detail-logo {
-  width: 70px;
-  height: 70px;
-  border-radius: 16px;
-  background: #eaf2ff;
-  display: grid;
-  place-items: center;
-  font-weight: 900;
-  color: var(--primary);
-  font-size: 20px;
-}
-.detail-head h1 { margin: 0 0 7px; }
-.detail-head p { margin: 0; color: var(--muted); }
-.contact {
-  margin-left: auto;
-  background: var(--primary2);
-  color: var(--primary);
-  padding: 13px 16px;
-  border-radius: 12px;
-  font-weight: 800;
-  font-size: 13px;
-}
-.tutorial-grid {
-  display: grid;
-  grid-template-columns: repeat(2,minmax(0,1fr));
-  gap: 16px;
-}
-.tutorial {
-  background: white;
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  padding: 24px;
-}
-.tutorial .icon {
-  font-size: 24px;
-  width: 46px;
-  height: 46px;
-  display: grid;
-  place-items: center;
+  flex-shrink: 0;
   background: #edf4ff;
   border-radius: 12px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  color: var(--azul);
+  font-weight: bold;
 }
-.tutorial h3 { margin: 14px 0 10px; }
-.tutorial p { color: var(--muted); line-height: 1.7; }
-.login-screen {
+.logo img {
+  width: 100%;
+  height: 100%;
+  padding: 7px;
+  object-fit: contain;
+}
+.info h3 { margin: 3px 0 9px; font-size: 15px; }
+.info p { margin: 0; font-size: 12px; color: var(--cinza); line-height: 1.5; }
+button {
+  cursor: pointer;
+  border: 0;
+  background: var(--azul);
+  color: white;
+  border-radius: 9px;
+  padding: 12px 16px;
+  font-weight: bold;
+}
+.voltar { margin-bottom: 18px; }
+.painel {
+  background: white;
+  border: 1px solid var(--borda);
+  border-radius: 16px;
+  padding: 25px;
+}
+.painel h1 { margin-top: 0; }
+.painel h3 { margin-bottom: 8px; }
+.painel p { line-height: 1.7; }
+.detalhe-logo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.detalhe-logo .logo { width: 75px; height: 75px; }
+.passos {
+  padding-left: 22px;
+  line-height: 1.9;
+}
+#detalhes { display: none; }
+#portal { display: none; }
+.login {
   min-height: 100vh;
   display: grid;
   place-items: center;
-  padding: 24px;
-  background: radial-gradient(circle at 15% 10%,#d8e8ff,transparent 38%),var(--bg);
+  padding: 20px;
 }
 .login-card {
-  width: min(430px,100%);
   background: white;
-  border: 1px solid var(--line);
-  border-radius: 24px;
-  padding: 34px;
-  box-shadow: var(--shadow);
+  padding: 32px;
+  border: 1px solid var(--borda);
+  border-radius: 18px;
+  width: min(420px, 100%);
+  box-shadow: 0 12px 40px #14243a12;
 }
-.login-brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-weight: 850;
-  margin-bottom: 30px;
-}
-.login-card h1 { font-size: 30px; margin: 0 0 10px; }
-.login-card p { color: var(--muted); line-height: 1.6; font-size: 14px; }
+.login-card h1 { margin-bottom: 8px; }
+.login-card p { color: var(--cinza); line-height: 1.6; }
 .login-card label {
   display: block;
-  font-size: 13px;
-  font-weight: 800;
   margin: 22px 0 8px;
+  font-weight: bold;
 }
 .login-card input {
   width: 100%;
   padding: 14px;
-  border: 1px solid #d5e0ef;
-  border-radius: 10px;
+  border: 1px solid var(--borda);
+  border-radius: 9px;
   font-size: 16px;
 }
-.login-card button {
-  width: 100%;
-  margin-top: 14px;
-  padding: 14px;
-  border: 0;
-  border-radius: 10px;
-  background: var(--primary);
-  color: white;
-  font-weight: 800;
-  cursor: pointer;
-}
-.login-error { min-height: 20px; color: #b42318 !important; }
-.demo-note {
-  margin-top: 18px;
+.login-card button { width: 100%; margin-top: 14px; }
+.erro { color: #b42318 !important; }
+.aviso {
+  margin-top: 16px;
   padding: 12px;
   background: #fff8e6;
-  border: 1px solid #f1dfad;
-  border-radius: 10px;
-  color: #765b13;
+  border-radius: 9px;
   font-size: 12px;
-  line-height: 1.5;
 }
-@media(max-width:900px) {
-  .hero { grid-template-columns: 1fr; }
-  .grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+@media (max-width: 850px) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
-@media(max-width:600px) {
-  .grid,.tutorial-grid { grid-template-columns: 1fr; }
-  .hero h1 { font-size: 42px; }
-  .main { padding-top: 25px; }
-  .detail-head { padding: 18px; }
-  .contact { margin-left: 0; width: 100%; }
+@media (max-width: 550px) {
+  .grid { grid-template-columns: 1fr; }
+  .hero { padding: 24px; }
+  .titulo { align-items: flex-start; }
 }
 </style>
 </head>
 <body>
 
-<section class="login-screen" id="loginScreen">
-  <form class="login-card" id="loginForm">
-    <div class="login-brand">
-      <div class="brand-mark">✚</div>
-      <div>
-        Central de Convênios
-        <small style="display:block;color:#697b92;font-size:10px;margin-top:4px">
-          ACESSO AO PORTAL
-        </small>
-      </div>
-    </div>
-
+<section class="login" id="login">
+  <form class="login-card" id="formLogin">
+    <div class="marca">✚</div>
     <h1>Bem-vindo</h1>
-    <p>Digite sua matrícula pessoal para continuar.</p>
-
+    <p>Central de Convênios — Manual Operacional do Prestador.</p>
     <label for="matricula">Matrícula pessoal</label>
-    <input id="matricula" inputmode="numeric"
-      autocomplete="off" placeholder="Digite sua matrícula" required>
-
+    <input id="matricula" placeholder="Digite sua matrícula"
+           inputmode="numeric" required>
     <button type="submit">Acessar portal →</button>
-    <p class="login-error" id="loginError" aria-live="polite"></p>
-
-    <div class="demo-note">
-      Modo de demonstração: matrícula 19846 liberada para teste.
-      Esta validação não protege informações internas.
+    <p id="erro" class="erro"></p>
+    <div class="aviso">
+      Matrícula 19846 liberada para demonstração.
+      Esta tela de teste não protege dados internos.
     </div>
   </form>
 </section>
 
-<div class="app" id="app" style="display:none">
-  <header class="topbar">
-    <div class="brand">
-      <div class="brand-mark">✚</div>
-      <div>
-        Central de Convênios
-        <small>MANUAL OPERACIONAL DO PRESTADOR</small>
-      </div>
-    </div>
-    <div style="font-size:12px;font-weight:750;background:#f0f5fc;padding:9px 12px;border-radius:8px">
-      PORTAL DE TESTE
+<div id="portal">
+  <header>
+    <div class="marca">✚</div>
+    <div>
+      <h2>Central de Convênios</h2>
+      <small>MANUAL OPERACIONAL DO PRESTADOR</small>
     </div>
   </header>
 
-  <main class="main">
-    <section class="home" id="home">
+  <main>
+    <section id="inicio">
       <div class="hero">
-        <div class="hero-copy">
-          <div class="eyebrow">CENTRAL DE ATENDIMENTO · PRESTADORES</div>
-          <h1>Informação certa.<br>Atendimento mais ágil.</h1>
-          <p>Consulte os contatos e os procedimentos operacionais dos convênios em um só lugar, de forma rápida e organizada.</p>
-          <label class="search">
-            <span>⌕</span>
-            <input id="search" placeholder="Busque pelo nome do convênio..." autocomplete="off">
-          </label>
-        </div>
-
-        <div class="hero-card">
-          <div>
-            <div style="font-size:11px;letter-spacing:.16em;font-weight:800;color:#b9d7ff;margin-bottom:18px">
-              BASE DE CONSULTA
-            </div>
-            <div class="number">22</div>
-            <div style="font-size:19px;font-weight:800;margin-top:8px">convênios disponíveis</div>
-            <p>Telefones e tutoriais operacionais organizados para facilitar sua rotina.</p>
-          </div>
-          <div style="font-size:12px;color:#c6dcf8;border-top:1px solid #ffffff2b;padding-top:15px">
-            Selecione um convênio para consultar os detalhes ↗
-          </div>
-        </div>
+        <h1>Informação certa.<br>Atendimento mais ágil.</h1>
+        <p>Consulte os contatos e procedimentos operacionais dos convênios em um só lugar.</p>
+        <input class="busca" id="busca"
+               placeholder="Buscar convênio pelo nome...">
       </div>
 
-      <div class="section-head">
+      <div class="titulo">
         <h2>Todos os convênios</h2>
-        <p id="count">22 disponíveis</p>
+        <span id="contador">22 convênios</span>
       </div>
-      <div class="grid" id="grid"></div>
+      <div class="grid" id="lista"></div>
     </section>
 
-    <section class="detail" id="detail">
-      <button class="back" id="back">← Voltar para convênios</button>
-
-      <div class="detail-head">
-        <div class="detail-logo" id="dLogo">BR</div>
-        <div>
-          <h1 id="dName">Bradesco</h1>
-          <p>Manual operacional</p>
+    <section id="detalhes">
+      <button class="voltar" onclick="voltar()">← Voltar aos convênios</button>
+      <div class="painel">
+        <div class="detalhe-logo">
+          <div class="logo" id="logoDetalhe"></div>
+          <div>
+            <h1 id="nomeDetalhe"></h1>
+            <p id="telefoneDetalhe"></p>
+          </div>
         </div>
-        <div class="contact" id="dPhone"></div>
-      </div>
-
-      <div class="tutorial-grid">
-        <article class="tutorial">
-          <div class="icon">📖</div>
-          <h3>Tutorial operacional</h3>
-          <div id="tutorialText"></div>
-        </article>
-        <article class="tutorial">
-          <div class="icon">☎</div>
-          <h3>Telefones de contato</h3>
-          <p id="dPhone2"></p>
-        </article>
+        <hr>
+        <h3>📖 Tutorial operacional</h3>
+        <ol class="passos" id="passos"></ol>
+        <h3>☎ Telefones de contato</h3>
+        <p id="telefoneTexto"></p>
       </div>
     </section>
   </main>
 </div>
 
 <script>
-
 const convenios = [
-  ['Unimed Seguros - Top Saúde','(11) 3003-5303','https://logo.clearbit.com/unimedseguros.com.br','US'],
-  ['Alice','(11) 4020-5270','https://logo.clearbit.com/alice.com.br','AL'],
-  ['Proasa','(61) 3701-1868 / (61) 3701-1800','https://logo.clearbit.com/proasa.com.br','PR'],
-  ['Amil','(11) 3004-1028 NAC / (11) 3004-1050','https://logo.clearbit.com/amil.com.br','AM'],
-  ['Porto Seguro','(11) 3366-3633','https://logo.clearbit.com/portoseguro.com.br','PS'],
-  ['Bradesco','(11) 4004-4580','https://logo.clearbit.com/bradescoseguros.com.br','BR'],
-  ['Care Plus','0800 407 9000','https://logo.clearbit.com/careplus.com.br','CP'],
-  ['Orizon / Itaúseg','(11) 4932-5014 / (11) 3003-7333 / 0800 701 9817','https://logo.clearbit.com/orizon.com.br','OI'],
-  ['NotreDame','(11) 3155-2355 / Savi (11) 4002-3336','https://logo.clearbit.com/hapvida.com.br','ND'],
-  ['MedSenior','(27) 3025-5536 / (27) 99792-0267 / (11) 4007-2001','https://logo.clearbit.com/medsenior.com.br','MS'],
-  ['Abas','0800 591 5268 / (19) 99913-7135','https://logo.clearbit.com/abas.org.br','AB'],
-  ['Unafisco Saúde','0800 028 2777','https://logo.clearbit.com/unafisco.org.br','UN'],
-  ['Vivest','4004-0173','https://logo.clearbit.com/vivest.com.br','VI'],
-  ['Plan Assiste MPF','(21) 2192-8925 / (21) 98413-2033 / (21) 3269-5309','https://logo.clearbit.com/mpf.mp.br','PA'],
-  ['RNW','(21) 2437-7374','https://logo.clearbit.com/rnw.com.br','RN'],
-  ['Petrobras','0800 728 3372','https://logo.clearbit.com/petrobras.com.br','PB'],
-  ['MedService','4004-2710 / Recuperar senha: 4004-2773','https://logo.clearbit.com/medservice.com.br','MD'],
-  ['Gama Saúde','0800 722 0178 / 4004-0178','https://logo.clearbit.com/gamasaude.com.br','GS'],
-  ['Omint','4004-4011 / (21) 2132-4141','https://logo.clearbit.com/omint.com.br','OM'],
-  ['Central Nacional Unimed - CNU','2505-1111 / (11) 3478-9600','https://logo.clearbit.com/centralnacionalunimed.com.br','CNU'],
-  ['Afresp','(11) 3886-8800','https://logo.clearbit.com/afresp.org.br','AF'],
-  ['Sul América','4004-5901','https://logo.clearbit.com/sulamerica.com.br','SA']
+  ["Unimed Seguros - Top Saúde","(11) 3003-5303","unimedseguros.com.br","US"],
+  ["Alice","(11) 4020-5270","alice.com.br","AL"],
+  ["Proasa","(61) 3701-1868 / (61) 3701-1800","proasa.com.br","PR"],
+  ["Amil","(11) 3004-1028 NAC / (11) 3004-1050","amil.com.br","AM"],
+  ["Porto Seguro","(11) 3366-3633","portoseguro.com.br","PS"],
+  ["Bradesco","(11) 4004-4580","bradescoseguros.com.br","BR"],
+  ["Care Plus","0800 407 9000","careplus.com.br","CP"],
+  ["Orizon / Itaúseg","(11) 4932-5014 / (11) 3003-7333 / 0800 701 9817","orizon.com.br","OI"],
+  ["NotreDame","(11) 3155-2355 / Savi (11) 4002-3336","hapvida.com.br","ND"],
+  ["MedSenior","(27) 3025-5536 / (27) 99792-0267 / (11) 4007-2001","medsenior.com.br","MS"],
+  ["Abas","0800 591 5268 / (19) 99913-7135","abas.org.br","AB"],
+  ["Unafisco Saúde","0800 028 2777","unafisco.org.br","UN"],
+  ["Vivest","4004-0173","vivest.com.br","VI"],
+  ["Plan Assiste MPF","(21) 2192-8925 / (21) 98413-2033 / (21) 3269-5309","mpf.mp.br","PA"],
+  ["RNW","(21) 2437-7374","rnw.com.br","RN"],
+  ["Petrobras","0800 728 3372","petrobras.com.br","PB"],
+  ["MedService","4004-2710 / Recuperar senha: 4004-2773","medservice.com.br","MD"],
+  ["Gama Saúde","0800 722 0178 / 4004-0178","gamasaude.com.br","GS"],
+  ["Omint","4004-4011 / (21) 2132-4141","omint.com.br","OM"],
+  ["Central Nacional Unimed - CNU","2505-1111 / (11) 3478-9600","centralnacionalunimed.com.br","CNU"],
+  ["Afresp","(11) 3886-8800","afresp.org.br","AF"],
+  ["Sul América","4004-5901","sulamerica.com.br","SA"]
 ];
 
 const tutoriais = {
-  'Bradesco': [
-    'Acesse a opção Situação do Beneficiário.',
-    'Informe o número do cartão ou CPF do beneficiário, consulte a elegibilidade e imprima o resultado.',
-    'Solicite uma nova senha WEB, conforme o procedimento do convênio.',
-    'Selecione o código do referenciado 0000190616 e solicite a internação.',
-    '', '', '', ''
+  "Bradesco": [
+    "Acesse Situação do Beneficiário e informe o número do cartão ou CPF.",
+    "Consulte a elegibilidade e imprima o resultado.",
+    "Solicite uma nova senha WEB, se necessário.",
+    "Selecione o código referenciado 0000190616 e solicite a internação."
   ]
 };
 
-const grid = document.getElementById('grid');
-const search = document.getElementById('search');
-const count = document.getElementById('count');
+function urlLogo(c) {
+  return "https://www.google.com/s2/favicons?domain=" +
+         encodeURIComponent(c[2]) + "&sz=128";
+}
 
-function render(termo = '') {
-  grid.innerHTML = '';
+function criarLogo(c, destino) {
+  destino.innerHTML = "";
+  const img = document.createElement("img");
+  img.src = urlLogo(c);
+  img.alt = "Logo " + c[0];
+
+  img.onerror = function() {
+    destino.innerHTML = "";
+    destino.textContent = c[3];
+  };
+
+  destino.appendChild(img);
+}
+
+function renderizar(filtro = "") {
+  const lista = document.getElementById("lista");
+  lista.innerHTML = "";
 
   const encontrados = convenios.filter(c =>
-    c[0].toLowerCase().includes(termo.toLowerCase())
+    c[0].toLowerCase().includes(filtro.toLowerCase())
   );
 
-  count.textContent = encontrados.length + ' disponível' +
-    (encontrados.length === 1 ? '' : 'is');
+  document.getElementById("contador").textContent =
+    encontrados.length + " convênio(s)";
 
-  if (!encontrados.length) {
-    grid.innerHTML = '<div class="empty">Nenhum convênio encontrado.</div>';
+  if (encontrados.length === 0) {
+    lista.textContent = "Nenhum convênio encontrado.";
     return;
   }
 
   encontrados.forEach(c => {
-    const card = document.createElement('article');
-    card.className = 'card';
+    const cartao = document.createElement("article");
+    cartao.className = "cartao";
 
-    const logo = document.createElement('div');
-    logo.className = 'logo-slot';
-    logo.textContent = c[2];
+    const logo = document.createElement("div");
+    logo.className = "logo";
+    criarLogo(c, logo);
 
-    const nome = document.createElement('h3');
+    const info = document.createElement("div");
+    info.className = "info";
+
+    const nome = document.createElement("h3");
     nome.textContent = c[0];
 
-    const telefone = document.createElement('p');
+    const telefone = document.createElement("p");
     telefone.textContent = c[1];
 
-    card.append(logo, nome, telefone);
-    card.addEventListener('click', () => abrirConvenio(c));
-    grid.appendChild(card);
+    info.append(nome, telefone);
+    cartao.append(logo, info);
+    cartao.addEventListener("click", () => abrir(c));
+    lista.appendChild(cartao);
   });
 }
 
-function abrirConvenio(c) {
-  document.getElementById('home').classList.add('hidden');
-  document.getElementById('detail').classList.add('active');
+function abrir(c) {
+  document.getElementById("inicio").style.display = "none";
+  document.getElementById("detalhes").style.display = "block";
 
-  document.getElementById('dLogo').textContent = c[2];
-  document.getElementById('dName').textContent = c[0];
-  document.getElementById('dPhone').textContent = '☎ ' + c[1];
-  document.getElementById('dPhone2').textContent = c[1];
+  document.getElementById("nomeDetalhe").textContent = c[0];
+  document.getElementById("telefoneDetalhe").textContent = c[1];
+  document.getElementById("telefoneTexto").textContent = c[1];
 
-  const area = document.getElementById('tutorialText');
-  area.innerHTML = '';
+  criarLogo(c, document.getElementById("logoDetalhe"));
+
+  const listaPassos = document.getElementById("passos");
+  listaPassos.innerHTML = "";
 
   const passos = tutoriais[c[0]] || [];
 
-  if (!passos.some(p => p.trim())) {
-    const aviso = document.createElement('p');
-    aviso.textContent = 'Tutorial ainda não cadastrado. Os passos poderão ser adicionados posteriormente.';
-    area.appendChild(aviso);
+  if (passos.length === 0) {
+    const item = document.createElement("li");
+    item.textContent = "Tutorial ainda não cadastrado.";
+    listaPassos.appendChild(item);
   } else {
-    passos.filter(p => p.trim()).forEach((passo, i) => {
-      const item = document.createElement('p');
-      const numero = document.createElement('strong');
-      numero.textContent = (i + 1) + 'º passo: ';
-      item.append(numero, document.createTextNode(passo));
-      area.appendChild(item);
+    passos.forEach(p => {
+      const item = document.createElement("li");
+      item.textContent = p;
+      listaPassos.appendChild(item);
     });
   }
 
-  window.scrollTo({top: 0, behavior: 'smooth'});
+  window.scrollTo(0, 0);
 }
 
-document.getElementById('back').addEventListener('click', () => {
-  document.getElementById('detail').classList.remove('active');
-  document.getElementById('home').classList.remove('hidden');
-  window.scrollTo({top: 0, behavior: 'smooth'});
+function voltar() {
+  document.getElementById("detalhes").style.display = "none";
+  document.getElementById("inicio").style.display = "block";
+  window.scrollTo(0, 0);
+}
+
+document.getElementById("busca").addEventListener("input", e => {
+  renderizar(e.target.value);
 });
 
-search.addEventListener('input', e => render(e.target.value));
-
-document.getElementById('loginForm').addEventListener('submit', e => {
+document.getElementById("formLogin").addEventListener("submit", e => {
   e.preventDefault();
 
-  const matricula = document.getElementById('matricula').value.trim();
-  const mensagem = document.getElementById('loginError');
+  const valor = document.getElementById("matricula").value.trim();
 
-  if (matricula === '19846') {
-    document.getElementById('loginScreen').style.display = 'none';
-    document.getElementById('app').style.display = 'block';
-    mensagem.textContent = '';
-    render();
+  if (valor === "19846") {
+    document.getElementById("login").style.display = "none";
+    document.getElementById("portal").style.display = "block";
   } else {
-    mensagem.textContent = 'Matrícula não autorizada para este teste.';
+    document.getElementById("erro").textContent =
+      "Matrícula não autorizada para este teste.";
   }
 });
+
+renderizar();
 </script>
 </body>
 </html>
