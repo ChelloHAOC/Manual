@@ -1,192 +1,709 @@
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- FAVICON PERSONALIZADO: cruz médica azul -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%231558b0'/%3E%3Cpath d='M25 10h14v15h15v14H39v15H25V39H10V25h15z' fill='white'/%3E%3C/svg%3E">
+
 <title>Central de Convênios</title>
-<link rel="icon" href="favicon.png">
+
 <style>
-:root{--bg:#eef3f9;--surface:#fff;--text:#14243a;--muted:#697b92;--line:#dfe7f1;--primary:#1558b0;--primary2:#eaf2ff;--shadow:0 18px 45px rgba(15,45,85,.09)}
-*{box-sizing:border-box}
-body{margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}
-.app{min-height:100vh;display:none}
-.topbar{min-height:78px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:16px 5%;gap:12px}
-.brand{display:flex;align-items:center;gap:12px;font-weight:800}
-.brand-mark{width:42px;height:42px;border-radius:12px;background:linear-gradient(145deg,#1767db,#0c397d);color:white;display:grid;place-items:center;font-size:22px}
-.brand small{display:block;color:var(--muted);font-size:11px;margin-top:4px}
-.main{width:min(1180px,90%);margin:auto;padding:36px 0 70px}
-.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:24px;align-items:stretch}
-.hero-copy{padding:20px 0}
-.eyebrow{display:inline-block;background:#e2edff;color:var(--primary);font-size:11px;font-weight:800;letter-spacing:2px;padding:10px;border-radius:8px}
-h1{letter-spacing:-1px}
-.hero h1{font-size:clamp(36px,5vw,62px);line-height:1.05;margin:20px 0}
-.hero p{color:var(--muted);font-size:16px;line-height:1.7}
-.search{display:flex;align-items:center;gap:10px;background:white;border:1px solid #d5e0ef;border-radius:12px;padding:8px}
-.search span{font-size:24px;color:var(--primary);padding-left:8px}
-.search input{flex:1;min-width:0;border:0;outline:0;padding:12px;font-size:15px}
-.hero-card{background:linear-gradient(135deg,#123b70,#1767b7);color:white;border-radius:16px;padding:28px;display:flex;flex-direction:column;justify-content:space-between;min-height:260px;box-shadow:var(--shadow)}
-.hero-card .number{font-size:76px;font-weight:900}
-.hero-card p{color:#d7e7fb}
-.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:42px 0 18px}
-.section-head h2{margin:0}
-.section-head p{font-size:13px;color:var(--muted);background:white;padding:9px 12px;border-radius:8px}
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.card{background:white;border:1px solid var(--line);border-radius:14px;padding:18px;min-height:145px;cursor:pointer;display:grid;grid-template-columns:54px 1fr;gap:12px;align-content:start;transition:.2s;box-shadow:0 3px 12px #18376408}
-.card:hover{transform:translateY(-3px);border-color:#9bbdec;box-shadow:var(--shadow)}
-.logo-slot{width:54px;height:54px;border-radius:12px;background:#eaf2ff;display:grid;place-items:center;font-weight:900;color:var(--primary);overflow:hidden;grid-row:1 / span 2}
-.logo-slot img,.detail-logo img{width:100%;height:100%;object-fit:contain;padding:5px}
-.card h3{font-size:15px;margin:3px 0 8px;overflow-wrap:anywhere}
-.card p{font-size:12px;color:var(--muted);margin:0;line-height:1.5;overflow-wrap:anywhere}
-.empty{grid-column:1/-1;padding:30px;text-align:center;color:var(--muted);background:white;border-radius:14px}
-.detail{display:none}
-.detail.active{display:block}
-.home.hidden{display:none}
-.back{border:0;background:#eaf2ff;color:var(--primary);font-weight:800;padding:12px 15px;border-radius:10px;cursor:pointer}
-.detail-head{margin:22px 0;background:white;border:1px solid var(--line);border-radius:18px;padding:24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;box-shadow:var(--shadow)}
-.detail-logo{width:72px;height:72px;border-radius:15px;background:#eaf2ff;display:grid;place-items:center;font-weight:900;color:var(--primary);font-size:22px;overflow:hidden}
-.detail-head h1{margin:0 0 7px;font-size:28px}
-.detail-head p{margin:0;color:var(--muted)}
-.contact{margin-left:auto;background:var(--primary2);color:var(--primary);padding:13px;border-radius:10px;font-weight:800;font-size:13px}
-.tutorial-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-.tutorial{background:white;border:1px solid var(--line);border-radius:16px;padding:22px}
-.tutorial h3{margin:10px 0}
-.tutorial p{color:var(--muted);line-height:1.7;overflow-wrap:anywhere}
-.login-screen{min-height:100vh;display:grid;place-items:center;padding:20px;background:radial-gradient(circle at 15% 10%,#d8e8ff,transparent 38%),var(--bg)}
-.login-card{width:min(430px,100%);background:white;border:1px solid var(--line);border-radius:22px;padding:30px;box-shadow:var(--shadow)}
-.login-brand{display:flex;align-items:center;gap:12px;font-weight:850;font-size:18px;margin-bottom:28px}
-.login-card h1{font-size:30px;margin:0 0 10px}
-.login-card p{color:var(--muted);line-height:1.6;font-size:14px}
-.login-card label{display:block;font-size:13px;font-weight:800;margin:22px 0 8px}
-.login-card input{width:100%;padding:14px;border:1px solid #d5e0ef;border-radius:10px;font:inherit}
-.login-card input:focus{outline:2px solid #82aef0}
-.login-card button{width:100%;margin-top:14px;padding:14px;border:0;border-radius:10px;background:var(--primary);color:white;font-weight:800;font-size:14px;cursor:pointer}
-.login-card button:hover{background:#0c397d}
-.login-error{min-height:20px;color:#b42318!important;font-size:13px!important}
-.demo-note{margin-top:14px;padding:12px;background:#fff8e6;border:1px solid #f1dfad;border-radius:10px;color:#765b13;font-size:12px;line-height:1.5}
-@media(max-width:850px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:560px){.grid,.tutorial-grid{grid-template-columns:1fr}.main{padding-top:24px}.hero h1{font-size:40px}.detail-head{align-items:flex-start}.contact{margin-left:0;width:100%}.section-head{align-items:flex-start;flex-direction:column}}
+:root {
+  --bg:#eef3f9;
+  --surface:#ffffff;
+  --surface2:#f5f8fc;
+  --text:#14243a;
+  --muted:#697b92;
+  --line:#dfe7f1;
+  --primary:#1558b0;
+  --primary2:#eaf2ff;
+  --shadow:0 18px 45px rgba(15,45,85,.09);
+}
+* { box-sizing:border-box; }
+html,body {
+  margin:0;
+  min-height:100%;
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+button,input { font:inherit; }
+button { cursor:pointer; }
+.app { min-height:100vh; }
+.topbar {
+  min-height:78px;
+  border-bottom:1px solid var(--line);
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:14px 5vw;
+  position:sticky;
+  top:0;
+  z-index:5;
+  box-shadow:0 5px 24px rgba(20,45,80,.05);
+}
+.brand,.login-brand {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-weight:850;
+  letter-spacing:-.03em;
+}
+.brand-mark {
+  width:42px;
+  height:42px;
+  flex-shrink:0;
+  border-radius:13px;
+  background:linear-gradient(145deg,#1767db,#0c397d);
+  color:white;
+  display:grid;
+  place-items:center;
+  font-size:23px;
+  box-shadow:0 7px 16px rgba(20,89,199,.25);
+}
+.brand small {
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  font-weight:700;
+  margin-top:4px;
+  letter-spacing:.06em;
+}
+.portal-label {
+  color:#536985;
+  font-size:11px;
+  font-weight:750;
+  background:#f0f5fc;
+  border:1px solid var(--line);
+  padding:9px 12px;
+  border-radius:8px;
+}
+.main { width:min(1180px,90vw); margin:auto; padding:42px 0 80px; }
+.hero {
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:24px;
+  align-items:stretch;
+}
+.hero-copy { padding:30px 0; }
+.eyebrow {
+  display:inline-flex;
+  color:var(--primary);
+  font-weight:850;
+  font-size:11px;
+  letter-spacing:.12em;
+  background:#e2edff;
+  padding:9px 12px;
+  border-radius:8px;
+}
+.hero h1 {
+  font-size:clamp(38px,5vw,64px);
+  line-height:1.02;
+  letter-spacing:-.06em;
+  margin:20px 0;
+}
+.hero-copy>p {
+  color:var(--muted);
+  font-size:16px;
+  line-height:1.7;
+  margin:0 0 26px;
+}
+.search {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:#fff;
+  border:1px solid #d5e0ef;
+  border-radius:12px;
+  padding:6px;
+  box-shadow:0 8px 22px rgba(24,55,100,.06);
+}
+.search:focus-within {
+  border-color:#82aef0;
+  box-shadow:0 0 0 4px rgba(20,89,199,.09);
+}
+.search span { font-size:24px; padding-left:12px; color:var(--primary); }
+.search input {
+  flex:1;
+  min-width:0;
+  border:0;
+  outline:0;
+  background:transparent;
+  color:var(--text);
+  font-size:14px;
+  padding:14px 8px;
+}
+.hero-card {
+  position:relative;
+  overflow:hidden;
+  background:#123b70;
+  color:white;
+  border-radius:16px;
+  padding:32px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  box-shadow:0 18px 40px rgba(17,48,91,.16);
+  min-height:300px;
+}
+.hero-card:before {
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(125deg,transparent 30%,rgba(54,125,210,.45));
+  pointer-events:none;
+}
+.hero-card>* { position:relative; }
+.hero-card .number {
+  font-size:82px;
+  font-weight:900;
+  line-height:1;
+  letter-spacing:-.07em;
+}
+.hero-card p {
+  color:#d7e7fb;
+  line-height:1.6;
+  font-size:14px;
+}
+.hero-foot {
+  font-size:12px;
+  color:#c6dcf8;
+  border-top:1px solid #ffffff2b;
+  padding-top:15px;
+  margin-top:20px;
+}
+.section-head {
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:12px;
+  margin:48px 0 18px;
+}
+.section-head h2 { font-size:25px; margin:0; letter-spacing:-.04em; }
+.section-head p {
+  margin:0;
+  color:var(--muted);
+  font-size:12px;
+  background:#fff;
+  border:1px solid var(--line);
+  padding:8px 12px;
+  border-radius:8px;
+}
+.grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+.card {
+  position:relative;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:20px;
+  min-height:145px;
+  cursor:pointer;
+  transition:transform .2s,border-color .2s,box-shadow .2s;
+  display:grid;
+  grid-template-columns:58px minmax(0,1fr);
+  grid-template-rows:auto auto;
+  column-gap:15px;
+  align-content:start;
+}
+.card:hover {
+  transform:translateY(-3px);
+  border-color:#9bbdec;
+  box-shadow:var(--shadow);
+}
+.logo-slot {
+  width:58px;
+  height:58px;
+  border-radius:12px;
+  background:#eaf2ff;
+  display:grid;
+  place-items:center;
+  font-weight:900;
+  color:var(--primary);
+  font-size:13px;
+  grid-row:1 / span 2;
+  overflow:hidden;
+}
+.logo-slot img,.detail-logo img {
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  padding:7px;
+}
+.card h3 { font-size:14px; margin:3px 0 8px; overflow-wrap:anywhere; }
+.card p { font-size:12px; color:var(--muted); margin:0; line-height:1.5; overflow-wrap:anywhere; }
+.card .open-label {
+  grid-column:2;
+  color:var(--primary);
+  font-size:11px;
+  font-weight:800;
+  margin-top:12px;
+}
+.empty {
+  grid-column:1/-1;
+  padding:32px;
+  text-align:center;
+  color:var(--muted);
+  background:#fff;
+  border:1px dashed var(--line);
+  border-radius:16px;
+}
+.hidden { display:none!important; }
+.detail { display:none; }
+.detail.active { display:block; }
+.back {
+  border:0;
+  background:#eaf2ff;
+  color:var(--primary);
+  font-weight:800;
+  padding:11px 15px;
+  border-radius:10px;
+  font-size:13px;
+}
+.detail-head {
+  margin:22px 0 24px;
+  background:linear-gradient(120deg,#fff,#f6f9ff);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:27px;
+  display:flex;
+  align-items:center;
+  gap:18px;
+  box-shadow:var(--shadow);
+}
+.detail-logo {
+  width:76px;
+  height:76px;
+  flex-shrink:0;
+  border-radius:17px;
+  background:#eaf2ff;
+  display:grid;
+  place-items:center;
+  font-weight:900;
+  color:var(--primary);
+  font-size:20px;
+  overflow:hidden;
+}
+.detail-head h1 { margin:0 0 7px; font-size:30px; letter-spacing:-.04em; }
+.detail-head p { margin:0; color:var(--muted); font-size:13px; }
+.contact {
+  margin-left:auto;
+  background:var(--primary2);
+  color:var(--primary);
+  padding:13px 16px;
+  border-radius:12px;
+  font-weight:800;
+  font-size:13px;
+  overflow-wrap:anywhere;
+}
+.tutorial-grid { display:grid; grid-template-columns:1.4fr .8fr; gap:16px; }
+.tutorial {
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:24px;
+  box-shadow:0 5px 20px rgba(24,55,100,.035);
+  min-width:0;
+}
+.tutorial .icon {
+  font-size:23px;
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  background:#edf4ff;
+  border-radius:12px;
+}
+.tutorial h3 { margin:14px 0 16px; }
+.tutorial-content { line-height:1.75; font-size:14px; overflow-wrap:anywhere; }
+.info-item {
+  padding:0 0 14px;
+  margin-bottom:14px;
+  border-bottom:1px solid #edf1f7;
+}
+.info-item:last-child { border-bottom:0; margin-bottom:0; }
+.info-number {
+  display:inline-grid;
+  place-items:center;
+  width:25px;
+  height:25px;
+  background:#eaf2ff;
+  color:var(--primary);
+  border-radius:7px;
+  font-size:11px;
+  font-weight:850;
+  margin-right:7px;
+}
+.pending-note {
+  background:#f5f8fc;
+  border:1px dashed #d5e0ef;
+  border-radius:10px;
+  padding:15px;
+  color:var(--muted);
+  line-height:1.6;
+}
+.edit-note {
+  margin-top:18px;
+  background:var(--surface2);
+  border-radius:12px;
+  padding:14px;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.6;
+}
+.login-screen {
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  padding:24px;
+  background:radial-gradient(circle at 15% 10%,#d8e8ff,transparent 38%),var(--bg);
+}
+.login-card {
+  width:min(430px,100%);
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:34px;
+  box-shadow:var(--shadow);
+}
+.login-brand { margin-bottom:30px; }
+.login-brand .brand-mark { width:45px; height:45px; }
+.login-brand small {
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  letter-spacing:.08em;
+  margin-top:3px;
+}
+.login-card h1 { font-size:30px; letter-spacing:-.04em; margin:0 0 10px; }
+.login-card p { color:var(--muted); line-height:1.6; font-size:14px; }
+.login-card label { display:block; font-size:13px; font-weight:800; margin:22px 0 8px; }
+.login-card input {
+  width:100%;
+  padding:14px;
+  border:1px solid #d5e0ef;
+  border-radius:10px;
+  outline:none;
+}
+.login-card input:focus { border-color:#82aef0; }
+.login-card button {
+  width:100%;
+  margin-top:14px;
+  padding:14px;
+  border:0;
+  border-radius:10px;
+  background:var(--primary);
+  color:white;
+  font-weight:800;
+}
+.login-error { min-height:20px; color:#b42318!important; font-size:13px!important; }
+.demo-note {
+  margin-top:18px;
+  padding:12px;
+  background:#fff8e6;
+  border:1px solid #f1dfad;
+  border-radius:10px;
+  color:#765b13;
+  font-size:12px;
+  line-height:1.5;
+}
+@media(max-width:900px) {
+  .hero { grid-template-columns:1fr; }
+  .grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media(max-width:650px) {
+  .topbar { padding:12px 5vw; }
+  .portal-label { display:none; }
+  .main { padding-top:25px; }
+  .grid { grid-template-columns:1fr; }
+  .tutorial-grid { grid-template-columns:1fr; }
+  .detail-head { align-items:flex-start; flex-wrap:wrap; padding:20px; }
+  .contact { margin-left:0; width:100%; }
+  .hero h1 { font-size:43px; }
+  .hero-card { min-height:220px; }
+  .login-card { padding:25px; }
+}
 </style>
 </head>
+
 <body>
 
 <section class="login-screen" id="loginScreen">
-<form class="login-card" id="loginForm">
-<div class="login-brand">
-<div class="brand-mark">✚</div>
-<div>Central de Convênios<small style="display:block;color:#697b92;font-size:10px;margin-top:4px">ACESSO AO PORTAL</small></div>
-</div>
-<h1>Bem-vindo</h1>
-<p>Digite sua matrícula pessoal para continuar.</p>
-<label for="matricula">Matrícula pessoal</label>
-<input id="matricula" name="matricula" inputmode="numeric" autocomplete="off" placeholder="Digite sua matrícula" required>
-<button type="submit">Acessar portal →</button>
-<p class="login-error" id="loginError" role="alert" aria-live="polite"></p>
-<div class="demo-note">Acesso demonstrativo para matrículas autorizadas. Esta validação no navegador não protege informações confidenciais.</div>
-</form>
+  <form class="login-card" id="loginForm">
+    <div class="login-brand">
+      <div class="brand-mark">✚</div>
+      <div>
+        Central de Convênios
+        <small>ACESSO AO PORTAL</small>
+      </div>
+    </div>
+    <h1>Bem-vindo</h1>
+    <p>Digite sua matrícula pessoal para continuar.</p>
+    <label for="matricula">Matrícula pessoal</label>
+    <input id="matricula" name="matricula" inputmode="numeric"
+      autocomplete="off" placeholder="Digite sua matrícula" required>
+    <button type="submit">Acessar portal →</button>
+    <p class="login-error" id="loginError" aria-live="polite"></p>
+    <div class="demo-note">
+      Modo de demonstração: a matrícula 19846 está liberada para teste.
+      Esta tela não oferece segurança real para informações internas.
+    </div>
+  </form>
 </section>
 
-<div class="app" id="app">
-<header class="topbar">
-<div class="brand"><div class="brand-mark">✚</div><div>Central de Convênios<small>MANUAL OPERACIONAL DO PRESTADOR</small></div></div>
-<div style="font-size:12px;font-weight:750;background:#f0f5fc;padding:10px;border-radius:8px">PORTAL INTERNO</div>
-</header>
+<div class="app" id="app" hidden>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">✚</div>
+      <div>
+        Central de Convênios
+        <small>MANUAL OPERACIONAL DO PRESTADOR</small>
+      </div>
+    </div>
+    <div class="portal-label">PORTAL INTERNO</div>
+  </header>
 
-<main class="main">
-<section class="home" id="home">
-<div class="hero">
-<div class="hero-copy">
-<div class="eyebrow">CENTRAL DE ATENDIMENTO · PRESTADORES</div>
-<h1>Informação certa.<br>Atendimento mais ágil.</h1>
-<p>Consulte os contatos e procedimentos operacionais dos convênios em um só lugar, de forma rápida e organizada.</p>
-<label class="search"><span>⌕</span><input id="search" placeholder="Busque pelo nome do convênio..." autocomplete="off"></label>
-</div>
-<div class="hero-card">
-<div><div style="font-size:11px;letter-spacing:2px;font-weight:800;color:#b9d7ff;margin-bottom:18px">BASE DE CONSULTA</div><div class="number">22</div><div style="font-size:19px;font-weight:800">convênios disponíveis</div><p>Telefones e tutoriais operacionais organizados para facilitar sua rotina.</p></div>
-<div style="font-size:12px;color:#c6dcf8;border-top:1px solid #ffffff40;padding-top:15px">Selecione um convênio para consultar os detalhes ↗</div>
-</div>
-</div>
-<div class="section-head"><h2>Todos os convênios</h2><p id="count">22 disponíveis</p></div>
-<div class="grid" id="grid"></div>
-</section>
+  <main class="main">
+    <section class="home" id="home">
+      <div class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow">CENTRAL DE ATENDIMENTO · PRESTADORES</div>
+          <h1>Informação certa.<br>Atendimento mais ágil.</h1>
+          <p>Consulte contatos, orientações de atendimento, códigos, senhas
+            e outras informações operacionais de cada convênio.</p>
+          <label class="search">
+            <span>⌕</span>
+            <input id="search" placeholder="Busque pelo nome do convênio..."
+              autocomplete="off" aria-label="Buscar convênio">
+          </label>
+        </div>
 
-<section class="detail" id="detail">
-<button class="back" id="back" type="button">← Voltar para convênios</button>
-<div class="detail-head">
-<div class="detail-logo" id="dLogo">BR</div>
-<div><h1 id="dName">Convênio</h1><p>Manual operacional</p></div>
-<div class="contact" id="dPhone"></div>
-</div>
-<div class="tutorial-grid">
-<article class="tutorial"><div style="font-size:24px">📖</div><h3>Tutorial</h3><div id="tutorialText"></div></article>
-<article class="tutorial"><div style="font-size:24px">☎</div><h3>Telefones</h3><p id="dPhone2"></p></article>
-</div>
-</section>
-</main>
+        <div class="hero-card">
+          <div>
+            <div style="font-size:11px;letter-spacing:.14em;font-weight:800;color:#b9d7ff;margin-bottom:18px">
+              BASE DE CONSULTA
+            </div>
+            <div class="number">22</div>
+            <div style="font-size:19px;font-weight:800;margin-top:8px">
+              convênios disponíveis
+            </div>
+            <p>Contatos e informações operacionais organizados para facilitar sua rotina.</p>
+          </div>
+          <div class="hero-foot">Selecione um convênio para consultar os detalhes ↗</div>
+        </div>
+      </div>
+
+      <div class="section-head">
+        <h2>Todos os convênios</h2>
+        <p id="count">22 disponíveis</p>
+      </div>
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <section class="detail" id="detail">
+      <button class="back" id="back">← Voltar para convênios</button>
+
+      <div class="detail-head">
+        <div class="detail-logo" id="dLogo">BR</div>
+        <div>
+          <h1 id="dName">Convênio</h1>
+          <p id="dSub">Informações operacionais do convênio</p>
+        </div>
+        <div class="contact" id="dPhone">Telefone</div>
+      </div>
+
+      <div class="tutorial-grid">
+        <article class="tutorial">
+          <div class="icon">📖</div>
+          <h3>Informações importantes</h3>
+          <div class="tutorial-content" id="tutorialText"></div>
+        </article>
+
+        <article class="tutorial">
+          <div class="icon">☎</div>
+          <h3>Telefones de contato</h3>
+          <div class="tutorial-content" id="dPhone2"></div>
+          <div class="edit-note">
+            <strong>Observação:</strong> confirme os contatos e procedimentos
+            nos canais oficiais do convênio quando necessário.
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
 </div>
 
 <script>
-'use strict';
-
-const matriculasAutorizadas = [
-  '19846','20154','8821','13295','9194',
-  '7663','8772','16920','11937','17544',
-  '14492','19852','8830','20170','1120345',
-  '11688','18599','14364','16436','16600'
-];
-
-const loginForm = document.getElementById('loginForm');
-const loginScreen = document.getElementById('loginScreen');
-const matriculaInput = document.getElementById('matricula');
-const loginError = document.getElementById('loginError');
-const app = document.querySelector('.app');
-
-app.style.display = 'none';
-
-loginForm.addEventListener('submit', function(event) {
-  event.preventDefault();
-
-  const matricula = matriculaInput.value.trim();
-
-  if (matriculasAutorizadas.includes(matricula)) {
-    loginError.textContent = '';
-    loginScreen.style.display = 'none';
-    app.style.display = 'block';
-  } else {
-    loginError.textContent = 'Matrícula não autorizada.';
-  }
-});
-
 const convenios = [
-['Unimed Seguros - Top Saúde','(11) 3003-5303','unimedseguros.com.br','US'],
-['Alice','(11) 4020-5270','alice.com.br','AL'],
-['Proasa','(61) 3701-1868 / (61) 3701-1800','proasa.com.br','PR'],
-['Amil','(11) 3004-1028 NAC / (11) 3004-1050','amil.com.br','AM'],
-['Porto Seguro','(11) 3366-3633','portoseguro.com.br','PS'],
-['Bradesco','(11) 4004-4580','bradescoseguros.com.br','BR'],
-['Care Plus','0800 407 9000','careplus.com.br','CP'],
-['Orizon / Itaúseg','(11) 4932-5014 / (11) 3003-7333 / 0800 701 9817','orizon.com.br','OI'],
-['NotreDame','(11) 3155-2355 / Savi (11) 4002-3336','hapvida.com.br','ND'],
-['MedSenior','(27) 3025-5536 / (27) 99792-0267 / (11) 4007-2001','medsenior.com.br','MS'],
-['Abas','0800 591 5268 / (19) 99913-7135','abas.org.br','AB'],
-['Unafisco Saúde','0800 028 2777','unafisco.org.br','UN'],
-['Vivest','4004-0173','vivest.com.br','VI'],
-['Plan Assiste MPF','(21) 2192-8925 / (21) 98413-2033 / (21) 3269-5309','mpf.mp.br','PA'],
-['RNW','(21) 2437-7374','rnw.com.br','RN'],
-['Petrobras','0800 728 3372','petrobras.com.br','PB'],
-['MedService','4004-2710 / Recuperar senha: 4004-2773','medservice.com.br','MD'],
-['Gama Saúde','0800 722 0178 / 4004-0178','gamasaude.com.br','GS'],
-['Omint','4004-4011 / (21) 2132-4141','omint.com.br','OM'],
-['Central Nacional Unimed - CNU','2505-1111 / (11) 3478-9600','centralnacionalunimed.com.br','CNU'],
-['Afresp','(11) 3886-8800','afresp.org.br','AF'],
-['Sul América','4004-5901','sulamerica.com.br','SA']
+  ['Unimed Seguros - Top Saúde','(11) 3003-5303','unimedseguros.com.br','US'],
+  ['Alice','(11) 4020-5270','alice.com.br','AL'],
+  ['Proasa','(61) 3701-1868 / (61) 3701-1800','proasa.com.br','PR'],
+  ['Amil','(11) 3004-1028 NAC / (11) 3004-1050','amil.com.br','AM'],
+  ['Porto Seguro','(11) 3366-3633','portoseguro.com.br','PS'],
+  ['Bradesco','(11) 4004-4580','bradescoseguros.com.br','BR'],
+  ['Care Plus','0800 407 9000','careplus.com.br','CP'],
+  ['Orizon / Itaúseg','(11) 4932-5014 / (11) 3003-7333 / 0800 701 9817','orizon.com.br','OI'],
+  ['NotreDame','(11) 3155-2355 / Savi (11) 4002-3336','hapvida.com.br','ND'],
+  ['MedSenior','(27) 3025-5536 / (27) 99792-0267 / (11) 4007-2001','medsenior.com.br','MS'],
+  ['Abas','0800 591 5268 / (19) 99913-7135','abas.org.br','AB'],
+  ['Unafisco Saúde','0800 028 2777','unafisco.org.br','UN'],
+  ['Vivest','4004-0173','vivest.com.br','VI'],
+  ['Plan Assiste MPF','(21) 2192-8925 / (21) 98413-2033 / (21) 3269-5309','mpf.mp.br','PA'],
+  ['RNW','(21) 2437-7374','rnw.com.br','RN'],
+  ['Petrobras','0800 728 3372','petrobras.com.br','PB'],
+  ['MedService','4004-2710 / Recuperar senha: 4004-2773','medservice.com.br','MD'],
+  ['Gama Saúde','0800 722 0178 / 4004-0178','gamasaude.com.br','GS'],
+  ['Omint','4004-4011 / (21) 2132-4141','omint.com.br','OM'],
+  ['Central Nacional Unimed - CNU','2505-1111 / (11) 3478-9600','centralnacionalunimed.com.br','CNU'],
+  ['Afresp','(11) 3886-8800','afresp.org.br','AF'],
+  ['Sul América','4004-5901','sulamerica.com.br','SA']
 ];
 
 const tutoriais = {
   'Bradesco': [
-    'Situação do Beneficiário: informe o número do cartão ou CPF, consulte a elegibilidade e imprima o resultado.',
-    'Solicite uma nova senha WEB quando necessário.',
-    'Selecione o código de referenciado 0000190616 e solicite a internação.'
+    'Código do prestador: 190616.',
+    'Elegibilidade: informar o número do cartão ou CPF, consultar a situação do beneficiário e imprimir a elegibilidade.',
+    'Senha WEB: solicitar uma nova senha quando necessário.',
+    'Internação: utilizar o código do prestador 190616.',
+    'Acomodação: utilizar os códigos de apartamento e UTI padrão adotados no processo.',
+    'UTI: quando a internação for em UTI, marcar a caixinha de UTI.'
+  ],
+
+  'Alice': [
+    'Telefone de contato: (11) 4020-5270.',
+    'Apartamento: código 98251001.',
+    'UTI: código 98251003.',
+    'Clínica Dr. Erico (código 104310): existe uma escala específica; conferir a escala antes de prosseguir.',
+    'Internações cirúrgicas: conferir a escala antes de prosseguir.',
+    'Médico particular: é necessário apresentar uma carta feita pelo paciente ou acompanhante.'
+  ],
+
+  'Unimed Seguros - Top Saúde': [
+    'Código: 1992.',
+    'Pacote apartamento: 60000651.',
+    'Pacote UTI: 60001038.',
+    'Alternativa: utilizar o código 10102019 para apartamento; esse código já inclui o pacote.'
+  ],
+
+  'Proasa': [
+    'Sistema: SAW Proasa.',
+    'Código: 11369.',
+    'Pacote apartamento: 60000554.',
+    'Pacote UTI: 60001038.'
+  ],
+
+  'Amil': [
+    'Telefone de contato: (11) 3004-1028.',
+    'NAC: (11) 3004-1050.',
+    'Código do prestador: 10397590.',
+    'Apartamento: código 10102019.',
+    'UTI: códigos 10104020 e 10104011 (intensivista).',
+    'Liminar: autorizacao.liminar@amil.com.br.',
+    'Médico particular: no site, selecionar ou registrar como particular.'
+  ],
+
+  'Porto Seguro': [
+    'Código do prestador: 50100011.',
+    'Pacote apartamento: 28002.',
+    'Acomodação: apartamento Standard.',
+    'Remoção: gestao.saude@portoseguro.com.br e saude.remocao@portoseguro.com.br.'
+  ],
+
+  'Care Plus': [
+    'Código: 5.',
+    'Orientação: ligar após 10 minutos para a Care Plus realizar o recebimento.'
+  ],
+
+  'Orizon / Itaúseg': [],
+
+  'NotreDame': [
+    'Savi: (11) 4002-3336.',
+    'Internação NotreDame: código 01990004.',
+    'Biometria: ao solicitar biometria, enviar o pedido de internação para savicall@hapvida.com.br e supcallcenter@hapvida.com.br, mantendo o e-mail da internação em cópia.',
+    'Depois, ligar para a Savi para solicitar a internação, junto do acompanhante.',
+    'Também é necessário realizar contato médico com a NotreDame.',
+    'Internação cirúrgica: solicitar como clínica.'
+  ],
+
+  'MedSenior': [
+    'Código do prestador: 0015768.',
+    'Apartamento: código 10102019; o código do pacote é preenchido automaticamente.',
+    'UTI: códigos 10104020 e 98208367.'
+  ],
+
+  'Abas': [
+    'Refeição: disponível para todas as idades.',
+    'Autorização: pode demorar. A internação pode ser realizada e, depois, é necessário acompanhar a solicitação pelo portal.',
+    'Pendências: deixar o caso na pasta de pendências para acompanhamento.',
+    'Códigos de apartamento: 60000651 e 10102019.'
+  ],
+
+  'Unafisco Saúde': [
+    'Código da operadora: 028592.',
+    'UTI: confirmar o código registrado no sistema antes de utilizar; anotação disponível: 600001038.',
+    'Apartamento: código 60000651.'
+  ],
+
+  'Vivest': [
+    'Código da operadora: 018642.',
+    'Prestador: PJ.',
+    'UTI: código 93050091.',
+    'Apartamento: código 93010176.'
+  ],
+
+  'Plan Assiste MPF': [
+    'Autorização: encaminhar a solicitação por e-mail.',
+    'Prazo: a autorização da internação pode levar de 5 a 8 dias.',
+    'E-mails para envio: prt02.dpa.autorizacoes@mpt.mp.br e seplan-secausp-autorizacao@mpu.mp.br.'
+  ],
+
+  'RNW': [
+    'Solicitação: encaminhar por e-mail. O endereço de envio ainda precisa ser cadastrado.'
+  ],
+
+  'Petrobras': [
+    'Portal: TISS Saúde Petrobras.',
+    'Apartamento: código 60000651.'
+  ],
+
+  'MedService': [],
+
+  'Gama Saúde': [],
+
+  'Omint': [
+    'Elegibilidade: solicitar pelo chat e digitar o CNPJ do hospital.',
+    'Solicitação de internação: pelo chat, selecionar a opção 2 e, em seguida, a opção 2 novamente.',
+    'Preencher todos os dados solicitados.',
+    'Data da internação: informar sempre o dia seguinte (um dia à frente), conforme orientação recebida.',
+    'A autorização não sai na hora. A orientação cadastrada é que se pode seguir com a internação sem aguardar a liberação.',
+    'A orientação cadastrada é que não é necessário acompanhar a liberação.'
+  ],
+
+  'Central Nacional Unimed - CNU': [
+    'Portal: SAW CNU.',
+    'Apartamento: código 60000651.',
+    'Remoção: remocao.cnu@centralnacionalunimed.com.br e remocao.un@unimednacional.coop.br.'
+  ],
+
+  'Afresp': [
+    'Solicitação: encaminhar por e-mail para centraldeguias@afresp.org.br.',
+    'Horário de atendimento: funciona em horário comercial.',
+    'Fora do horário comercial: deixar a guia na pasta de pendências e acompanhar por e-mail o envio da autorização.',
+    'Internações clínicas: somente para o Dr. Erico.',
+    'Internações cirúrgicas: não há médico específico.'
+  ],
+
+  'Sul América': [
+    'Elegibilidade: na página inicial, acessar Segurado e selecionar Validação de Elegibilidade. Informar a carteirinha do paciente e imprimir a elegibilidade.',
+    'Solicitação de internação: acessar Segurado e selecionar Solicitação; preencher os campos solicitados.',
+    'Pacientes cirúrgicos: selecionar “Outros tipos” para informar o código TUSS.',
+    'Pacientes clínicos: selecionar a especialidade em que o paciente ficará internado.',
+    'Após preencher os dados, clicar em Validar e depois em Confirmar.',
+    'A autorização geralmente sai na hora. Se não for autorizada imediatamente, acompanhar a solicitação pelo portal.'
   ]
 };
 
@@ -194,37 +711,102 @@ const grid = document.getElementById('grid');
 const search = document.getElementById('search');
 const count = document.getElementById('count');
 
-function render(termo = '') {
+function initialsLogo(initials) {
+  return '<span>' + initials + '</span>';
+}
+
+function logoUrl(domain) {
+  return 'https://www.google.com/s2/favicons?domain=' +
+    encodeURIComponent(domain) + '&sz=128';
+}
+
+function render(query = '') {
   grid.innerHTML = '';
-  const itens = convenios.filter(item =>
-    item[0].toLowerCase().includes(termo.toLowerCase())
+
+  const items = convenios.filter(item =>
+    item[0].toLowerCase().includes(query.toLowerCase())
   );
 
-  count.textContent = itens.length + ' disponível' + (itens.length === 1 ? '' : 'is');
+  count.textContent = items.length + ' disponível' +
+    (items.length === 1 ? '' : 'is');
 
-  if (itens.length === 0) {
+  if (!items.length) {
     grid.innerHTML = '<div class="empty">Nenhum convênio encontrado.</div>';
     return;
   }
 
-  itens.forEach(item => {
+  items.forEach(item => {
     const card = document.createElement('article');
     card.className = 'card';
+    card.tabIndex = 0;
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-label', 'Abrir ' + item[0]);
 
-    const logo = 'https://www.google.com/s2/favicons?domain=' +
-      encodeURIComponent(item[2]) + '&sz=128';
+    const logo = document.createElement('div');
+    logo.className = 'logo-slot';
+    logo.innerHTML = initialsLogo(item[3]);
 
-    card.innerHTML =
-      '<div class="logo-slot"><img src="' + logo +
-      '" alt="" onerror="this.style.display=\'none\';this.parentElement.textContent=\'' +
-      item[3] + '\'"></div>' +
-      '<h3></h3><p></p>';
+    const img = document.createElement('img');
+    img.src = logoUrl(item[2]);
+    img.alt = 'Logo ' + item[0];
+    img.onerror = () => {
+      logo.innerHTML = initialsLogo(item[3]);
+    };
+    logo.innerHTML = '';
+    logo.appendChild(img);
 
-    card.querySelector('h3').textContent = item[0];
-    card.querySelector('p').textContent = item[1];
+    const title = document.createElement('h3');
+    title.textContent = item[0];
+
+    const phone = document.createElement('p');
+    phone.textContent = item[1];
+
+    const open = document.createElement('div');
+    open.className = 'open-label';
+    open.textContent = 'Ver informações →';
+
+    card.append(logo, title, phone, open);
     card.addEventListener('click', () => openDetail(item));
+    card.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        openDetail(item);
+      }
+    });
+
     grid.appendChild(card);
   });
+}
+
+function tutorialHtml(name) {
+  const steps = (tutoriais[name] || []).filter(
+    step => typeof step === 'string' && step.trim()
+  );
+
+  if (!steps.length) {
+    return '<div class="pending-note">' +
+      '<strong>Informações ainda não cadastradas.</strong><br>' +
+      'Este espaço está reservado para adicionar os procedimentos ' +
+      'deste convênio quando os dados estiverem disponíveis.' +
+      '</div>';
+  }
+
+  return steps.map((step, index) =>
+    '<div class="info-item">' +
+      '<span class="info-number">' + (index + 1) + '</span>' +
+      escapeHtml(step) +
+    '</div>'
+  ).join('');
+}
+
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, char => ({
+    '&':'&amp;',
+    '<':'&lt;',
+    '>':'&gt;',
+    '"':'&quot;',
+    "'":'&#39;'
+  })[char]);
 }
 
 function openDetail(item) {
@@ -232,32 +814,60 @@ function openDetail(item) {
   document.getElementById('detail').classList.add('active');
 
   document.getElementById('dName').textContent = item[0];
-  document.getElementById('dLogo').textContent = item[3];
+  document.getElementById('dSub').textContent =
+    'Informações operacionais do convênio';
   document.getElementById('dPhone').textContent = '☎ ' + item[1];
   document.getElementById('dPhone2').textContent = item[1];
+  document.getElementById('tutorialText').innerHTML = tutorialHtml(item[0]);
 
-  const passos = tutoriais[item[0]] || [];
-  const tutorial = document.getElementById('tutorialText');
-  tutorial.innerHTML = '';
+  const logo = document.getElementById('dLogo');
+  logo.innerHTML = initialsLogo(item[3]);
 
-  for (let i = 0; i < 8; i++) {
-    const bloco = document.createElement('p');
-    const texto = passos[i] || 'Passo ainda não cadastrado.';
-    bloco.textContent = (i + 1) + 'º passo: ' + texto;
-    tutorial.appendChild(bloco);
-  }
+  const img = document.createElement('img');
+  img.src = logoUrl(item[2]);
+  img.alt = 'Logo ' + item[0];
+  img.onerror = () => {
+    logo.innerHTML = initialsLogo(item[3]);
+  };
+  logo.innerHTML = '';
+  logo.appendChild(img);
 
-  window.scrollTo({top: 0, behavior: 'smooth'});
+  window.scrollTo({ top:0, behavior:'smooth' });
 }
 
-document.getElementById('back').addEventListener('click', function() {
+document.getElementById('back').addEventListener('click', () => {
   document.getElementById('detail').classList.remove('active');
   document.getElementById('home').classList.remove('hidden');
-  window.scrollTo({top: 0, behavior: 'smooth'});
+  window.scrollTo({ top:0, behavior:'smooth' });
 });
 
-search.addEventListener('input', function(event) {
-  render(event.target.value);
+search.addEventListener('input', event => render(event.target.value));
+
+/*
+  ACESSO DEMONSTRATIVO
+  A validação feita no navegador não protege dados internos.
+  Para uso real no hospital, implemente autenticação no servidor.
+*/
+const matriculasAutorizadas = [
+  '19846','20154','8821','13295','9194','7663','8772','16920',
+  '11937','17544','14492','19852','8830','20170','1120345',
+  '11688','18599','14364','16436','16600'
+];
+
+document.getElementById('loginForm').addEventListener('submit', event => {
+  event.preventDefault();
+
+  const matricula = document.getElementById('matricula').value.trim();
+  const error = document.getElementById('loginError');
+
+  if (matriculasAutorizadas.includes(matricula)) {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('app').hidden = false;
+    error.textContent = '';
+    render();
+  } else {
+    error.textContent = 'Matrícula não autorizada.';
+  }
 });
 
 render();
