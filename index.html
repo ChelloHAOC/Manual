@@ -390,7 +390,29 @@ document.getElementById("formLogin").addEventListener("submit", e => {
 
   const valor = document.getElementById("matricula").value.trim();
 
-  if (valor === "19846") {
+  document.querySelector('.app').style.display='none';
+
+const matriculasAutorizadas = [
+  '19846','20154','8821','13295','9194',
+  '7663','8772','16920','11937','17544',
+  '14492','19852','8830','20170','1120345',
+  '11688','18599','14364','16436','16600'
+];
+
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const matricula = document.getElementById('matricula').value.trim();
+  const error = document.getElementById('loginError');
+
+  if (matriculasAutorizadas.includes(matricula)) {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.querySelector('.app').style.display = 'block';
+    error.textContent = '';
+  } else {
+    error.textContent = 'Matrícula não autorizada.';
+  }
+}); {
     document.getElementById("login").style.display = "none";
     document.getElementById("portal").style.display = "block";
   } else {
