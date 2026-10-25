@@ -251,142 +251,32 @@ button {
   </main>
 </div>
 
+
 <script>
 const convenios = [
-  ["Unimed Seguros - Top Saúde","(11) 3003-5303","unimedseguros.com.br","US"],
-  ["Alice","(11) 4020-5270","alice.com.br","AL"],
-  ["Proasa","(61) 3701-1868 / (61) 3701-1800","proasa.com.br","PR"],
-  ["Amil","(11) 3004-1028 NAC / (11) 3004-1050","amil.com.br","AM"],
-  ["Porto Seguro","(11) 3366-3633","portoseguro.com.br","PS"],
-  ["Bradesco","(11) 4004-4580","bradescoseguros.com.br","BR"],
-  ["Care Plus","0800 407 9000","careplus.com.br","CP"],
-  ["Orizon / Itaúseg","(11) 4932-5014 / (11) 3003-7333 / 0800 701 9817","orizon.com.br","OI"],
-  ["NotreDame","(11) 3155-2355 / Savi (11) 4002-3336","hapvida.com.br","ND"],
-  ["MedSenior","(27) 3025-5536 / (27) 99792-0267 / (11) 4007-2001","medsenior.com.br","MS"],
-  ["Abas","0800 591 5268 / (19) 99913-7135","abas.org.br","AB"],
-  ["Unafisco Saúde","0800 028 2777","unafisco.org.br","UN"],
-  ["Vivest","4004-0173","vivest.com.br","VI"],
-  ["Plan Assiste MPF","(21) 2192-8925 / (21) 98413-2033 / (21) 3269-5309","mpf.mp.br","PA"],
-  ["RNW","(21) 2437-7374","rnw.com.br","RN"],
-  ["Petrobras","0800 728 3372","petrobras.com.br","PB"],
-  ["MedService","4004-2710 / Recuperar senha: 4004-2773","medservice.com.br","MD"],
-  ["Gama Saúde","0800 722 0178 / 4004-0178","gamasaude.com.br","GS"],
-  ["Omint","4004-4011 / (21) 2132-4141","omint.com.br","OM"],
-  ["Central Nacional Unimed - CNU","2505-1111 / (11) 3478-9600","centralnacionalunimed.com.br","CNU"],
-  ["Afresp","(11) 3886-8800","afresp.org.br","AF"],
-  ["Sul América","4004-5901","sulamerica.com.br","SA"]
+  ['Unimed Seguros - Top Saúde', '(11) 3003-5303', 'https://logo.clearbit.com/unimedseguros.com.br', 'US'],
+  ['Alice', '(11) 4020-5270', 'https://logo.clearbit.com/alice.com.br', 'AL'],
+  ['Proasa', '(61) 3701-1868 / (61) 3701-1800', 'https://logo.clearbit.com/proasa.com.br', 'PR'],
+  ['Amil', '(11) 3004-1028 NAC / (11) 3004-1050', 'https://logo.clearbit.com/amil.com.br', 'AM'],
+  ['Porto Seguro', '(11) 3366-3633', 'https://logo.clearbit.com/portoseguro.com.br', 'PS'],
+  ['Bradesco', '(11) 4004-4580', 'https://logo.clearbit.com/bradescoseguros.com.br', 'BR'],
+  ['Care Plus', '0800 407 9000', 'https://logo.clearbit.com/careplus.com.br', 'CP'],
+  ['Orizon / Itaúseg', '(11) 4932-5014 / (11) 3003-7333 / 0800 701 9817', 'https://logo.clearbit.com/orizon.com.br', 'OI'],
+  ['NotreDame', '(11) 3155-2355 / Savi (11) 4002-3336', 'https://logo.clearbit.com/hapvida.com.br', 'ND'],
+  ['MedSenior', '(27) 3025-5536 / (27) 99792-0267 / (11) 4007-2001', 'https://logo.clearbit.com/medsenior.com.br', 'MS'],
+  ['Abas', '0800 591 5268 / (19) 99913-7135', 'https://logo.clearbit.com/abas.org.br', 'AB'],
+  ['Unafisco Saúde', '0800 028 2777', 'https://logo.clearbit.com/unafisco.org.br', 'UN'],
+  ['Vivest', '4004-0173', 'https://logo.clearbit.com/vivest.com.br', 'VI'],
+  ['Plan Assiste MPF', '(21) 2192-8925 / (21) 98413-2033 / (21) 3269-5309', 'https://logo.clearbit.com/mpf.mp.br', 'PA'],
+  ['RNW', '(21) 2437-7374', 'https://logo.clearbit.com/rnw.com.br', 'RN'],
+  ['Petrobras', '0800 728 3372', 'https://logo.clearbit.com/petrobras.com.br', 'PB'],
+  ['MedService', '4004-2710 / Recuperar senha: 4004-2773', 'https://logo.clearbit.com/medservice.com.br', 'MD'],
+  ['Gama Saúde', '0800 722 0178 / 4004-0178', 'https://logo.clearbit.com/gamasaude.com.br', 'GS'],
+  ['Omint', '4004-4011 / (21) 2132-4141', 'https://logo.clearbit.com/omint.com.br', 'OM'],
+  ['Central Nacional Unimed - CNU', '2505-1111 / (11) 3478-9600', 'https://logo.clearbit.com/centralnacionalunimed.com.br', 'CNU'],
+  ['Afresp', '(11) 3886-8800', 'https://logo.clearbit.com/afresp.org.br', 'AF'],
+  ['Sul América', '4004-5901', 'https://logo.clearbit.com/sulamerica.com.br', 'SA']
 ];
-
-const tutoriais = {
-  "Bradesco": [
-    "Acesse Situação do Beneficiário e informe o número do cartão ou CPF.",
-    "Consulte a elegibilidade e imprima o resultado.",
-    "Solicite uma nova senha WEB, se necessário.",
-    "Selecione o código referenciado 0000190616 e solicite a internação."
-  ]
-};
-
-function urlLogo(c) {
-  return "https://www.google.com/s2/favicons?domain=" +
-         encodeURIComponent(c[2]) + "&sz=128";
-}
-
-function criarLogo(c, destino) {
-  destino.innerHTML = "";
-  const img = document.createElement("img");
-  img.src = urlLogo(c);
-  img.alt = "Logo " + c[0];
-
-  img.onerror = function() {
-    destino.innerHTML = "";
-    destino.textContent = c[3];
-  };
-
-  destino.appendChild(img);
-}
-
-function renderizar(filtro = "") {
-  const lista = document.getElementById("lista");
-  lista.innerHTML = "";
-
-  const encontrados = convenios.filter(c =>
-    c[0].toLowerCase().includes(filtro.toLowerCase())
-  );
-
-  document.getElementById("contador").textContent =
-    encontrados.length + " convênio(s)";
-
-  if (encontrados.length === 0) {
-    lista.textContent = "Nenhum convênio encontrado.";
-    return;
-  }
-
-  encontrados.forEach(c => {
-    const cartao = document.createElement("article");
-    cartao.className = "cartao";
-
-    const logo = document.createElement("div");
-    logo.className = "logo";
-    criarLogo(c, logo);
-
-    const info = document.createElement("div");
-    info.className = "info";
-
-    const nome = document.createElement("h3");
-    nome.textContent = c[0];
-
-    const telefone = document.createElement("p");
-    telefone.textContent = c[1];
-
-    info.append(nome, telefone);
-    cartao.append(logo, info);
-    cartao.addEventListener("click", () => abrir(c));
-    lista.appendChild(cartao);
-  });
-}
-
-function abrir(c) {
-  document.getElementById("inicio").style.display = "none";
-  document.getElementById("detalhes").style.display = "block";
-
-  document.getElementById("nomeDetalhe").textContent = c[0];
-  document.getElementById("telefoneDetalhe").textContent = c[1];
-  document.getElementById("telefoneTexto").textContent = c[1];
-
-  criarLogo(c, document.getElementById("logoDetalhe"));
-
-  const listaPassos = document.getElementById("passos");
-  listaPassos.innerHTML = "";
-
-  const passos = tutoriais[c[0]] || [];
-
-  if (passos.length === 0) {
-    const item = document.createElement("li");
-    item.textContent = "Tutorial ainda não cadastrado.";
-    listaPassos.appendChild(item);
-  } else {
-    passos.forEach(p => {
-      const item = document.createElement("li");
-      item.textContent = p;
-      listaPassos.appendChild(item);
-    });
-  }
-
-  window.scrollTo(0, 0);
-}
-
-function voltar() {
-  document.getElementById("detalhes").style.display = "none";
-  document.getElementById("inicio").style.display = "block";
-  window.scrollTo(0, 0);
-}
-
-document.getElementById("busca").addEventListener("input", e => {
-  renderizar(e.target.value);
-});
-
-
-document.querySelector('.app').style.display = 'none';
 
 const matriculasAutorizadas = [
   '19846', '20154', '8821', '13295', '9194',
@@ -395,7 +285,9 @@ const matriculasAutorizadas = [
   '11688', '18599', '14364', '16436', '16600'
 ];
 
-document.getElementById('loginForm').addEventListener('submit', function(e) {
+document.querySelector('.app').style.display = 'none';
+
+document.getElementById('loginForm').addEventListener('submit', function (e) {
   e.preventDefault();
 
   const matricula = document.getElementById('matricula').value.trim();
@@ -409,7 +301,4 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
     error.textContent = 'Matrícula não autorizada.';
   }
 });
-
 </script>
-</body>
-</html>
