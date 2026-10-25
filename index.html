@@ -388,15 +388,14 @@ document.getElementById("busca").addEventListener("input", e => {
 document.getElementById("formLogin").addEventListener("submit", e => {
   e.preventDefault();
 
-  const valor = document.getElementById("matricula").value.trim();
 
-  document.querySelector('.app').style.display='none';
+document.querySelector('.app').style.display = 'none';
 
 const matriculasAutorizadas = [
-  '19846','20154','8821','13295','9194',
-  '7663','8772','16920','11937','17544',
-  '14492','19852','8830','20170','1120345',
-  '11688','18599','14364','16436','16600'
+  '19846', '20154', '8821', '13295', '9194',
+  '7663', '8772', '16920', '11937', '17544',
+  '14492', '19852', '8830', '20170', '1120345',
+  '11688', '18599', '14364', '16436', '16600'
 ];
 
 document.getElementById('loginForm').addEventListener('submit', function(e) {
@@ -412,16 +411,8 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
   } else {
     error.textContent = 'Matrícula não autorizada.';
   }
-}); {
-    document.getElementById("login").style.display = "none";
-    document.getElementById("portal").style.display = "block";
-  } else {
-    document.getElementById("erro").textContent =
-      "Matrícula não autorizada para este teste.";
-  }
 });
 
-renderizar();
 </script>
 </body>
 </html>
